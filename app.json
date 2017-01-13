@@ -1,0 +1,13 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/register/register"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#48C23D",
+    "navigationBarTitleText": "广西师范学院智慧校园服务",
+    "navigationBarTextStyle":"white"
+  }
+}
