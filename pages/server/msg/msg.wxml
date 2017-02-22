@@ -1,0 +1,34 @@
+<view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">未读</view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">所有</view>
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">群组</view>
+</view>
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 52}}px" bindchange="bindChange">
+    <swiper-item class="un-read">
+        <!-- 滚动区域 -->
+        <scroll-view scroll-y="true" style="height:{{winHeight - 52}}px" bindscrolltolower="lower" scroll-into-view="red" scroll-top="100">
+            <view wx:key="msgItem" wx:for="{{msgItem}}">
+                <navigator class="msg" url="./user_msg/user_msg?sex={{item.SEX}}&fromuid={{item.FROM_UID}}">
+                    <image class="sex" wx:if="{{item.SEX==0}}" src="http://127.0.0.1:8360/static/img/boy.svg"></image>
+                    <image class="sex" wx:else src="http://127.0.0.1:8360/static/img/girl.svg"></image>
+                    <view class="msg-main">
+                        <text class="msg-from">{{item.USER_NAME}}</text>
+                        <text class="msg-content">{{item.CONTENT}}</text>
+                    </view>
+                    <text class="msg-date">{{item.SEND_TIME}}</text>
+                </navigator>
+            </view>
+
+            <view class="loading" wx:if="{{loadShow}}">数据加载中...</view>
+        </scroll-view>
+
+    </swiper-item>
+    <!-- 我是呵呵 -->
+    <swiper-item>
+        <view>我是呵呵</view>
+    </swiper-item>
+    <!-- 我是嘿嘿 -->
+    <swiper-item>
+        <view>我是嘿嘿</view>
+    </swiper-item>
+</swiper>

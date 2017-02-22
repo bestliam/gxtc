@@ -1,34 +1,16 @@
 /**index.wxss**/
 
-.container {
-  padding: 100rpx 0;
-} 
-.userinfo {
+swiper{height: 350rpx}
+image{width: 100%}
+.section{
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 18rpx;
+  height: 220rpx;
+  flex-direction: row;
+  border-top: 1px solid #e8e8e8;
+  align-items:center;
 }
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin: 20px 0;
-  padding:0 20px;
-  text-indent: 2em;
-  line-height: 160%;
-}
-.userform{
-  width:80%
-}
-input{border: 1px solid #48C23D;margin: 15px 0px;height: 45px}
-.btn-area{margin-top: 10px}
-
+.img image{height: 200rpx;width: 200rpx}
+.show{padding: 10rpx 20rpx;}
+.show .title{color: #353535;font-size: 28rpx;font-weight: bold;margin-bottom: 10rpx;display: block;}
+.show .content{color:#888888;font-size: 24rpx;}

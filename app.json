@@ -1,12 +1,33 @@
 {
   "pages":[
+    "pages/server/msg/user_msg/user_msg",
+    "pages/server/msg/msg",
+    "pages/animation/animation",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/register/register"
+    "pages/register/register",
+    "pages/server/server"
   ],
+  "tabBar": {
+    "backgroundColor":"#ffffff",
+    "borderStyle":"white",
+    "color":"#353535",
+    "selectedColor": "#09bb07",
+    "list": [{
+      "iconPath":"images/index.png",
+      "selectedIconPath":"images/index-actived.png",
+      "pagePath": "pages/index/index",
+      "text": "首页"
+    }, {
+      "iconPath":"images/server.png",
+      "selectedIconPath":"images/server-actived.png",
+      "pagePath": "pages/server/server",
+      "text": "服务"
+    }]
+  },
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#48C23D",
+    "navigationBarBackgroundColor": "#09bb07",
     "navigationBarTitleText": "广西师范学院智慧校园服务",
     "navigationBarTextStyle":"white"
   }

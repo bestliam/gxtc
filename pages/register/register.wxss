@@ -1,30 +1,10 @@
 /* pages/register/register.wxss */
 .container {
   padding: 100rpx 0;
+  font-size: 28rpx;
 } 
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
 
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin: 20px 0;
-  padding:0 20px;
-  text-indent: 2em;
-  line-height: 160%;
-}
 .userform{
   width:80%
 }

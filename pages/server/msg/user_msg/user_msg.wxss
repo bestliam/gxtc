@@ -1,0 +1,20 @@
+page{background-color: #f6f6f6;font-size: 13px}
+.one{padding: 40rpx}
+.width{flex: 1}
+.send {color: #ffffff;position: relative;padding: 30rpx;background:#09bb07;border-radius: 5px;display: table;float: right;font-size: 13px;word-break:break-all}
+.user .send{background-color: #DDF0DD;color: #353535;float: left;word-break:break-all;}
+.send .arrow {position: absolute;top: 12px;right: -16px;width: 0;height: 0;font-size: 0;border: solid 8px;border-color: #f6f6f6 #f6f6f6 #f6f6f6 #09bb07;}
+.send .rearrow {position: absolute;top: 17px;left: -16px;width: 0;height: 0;font-size: 0;border: solid 8px;border-color: #f6f6f6 #DDF0DD #f6f6f6 #f6f6f6;}
+.me,.user{display:flex;flex-direction: row;justify-content: flex-end;}
+.img {width: 120rpx;height: 120rpx;margin: 0 0 0 40rpx;border-radius: 50%;}
+.user .img {margin: 0 40rpx 0 0;}
+
+.speak{display: flex;flex-direction: row;align-items: center;padding: 0 10px}
+input{border-bottom: 1px solid #48C23D;height: 29px;flex:1}
+button{margin-left: 10rpx;}
+
+.btn-show{display: flex;flex-direction: column;position: absolute;left: 0;top:0;}
+.back-ground{flex: 7;background-color: #000000;opacity:0.6}
+.btn{flex:2;background-color: #ffffff;display: flex;flex-direction:row;justify-content:center;align-items: center;opacity:1}
+.icon{width: 120rpx;height: 120rpx;margin: 30rpx}
+.cancel{height: 150rpx;line-height: 150rpx;text-align: center;}

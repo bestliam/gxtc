@@ -1,20 +1,17 @@
 <!--index.wxml-->
+<view class="header"><text>用户身份绑定</text></view>
 <view class="container">
-  <view  bindtap="bindViewTap" class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-  </view>
   <view class="usermotto">
-    <text class="user-motto">您好，{{userInfo.nickName}}！首次使用请先绑定您的身份证号，谢谢！</text>
+    <text class="user-motto">您好，首次使用请先绑定您的身份证号，谢谢！</text>
   </view>
   <view class="userform">
     <form bindsubmit="formSubmit" bindreset="formReset">
       <view class="section">
-        <input name="sfzh" placeholder="请输入您的身份证号ccccc" />
+        <input name="sfzh" type="idcard" placeholder="请输入您的身份证号" />
       </view>
       <view class="btn-area">
         <button type="primary" formType="submit">确认绑定</button>
-        
+
       </view>
     </form>
   </view>

@@ -1,12 +1,20 @@
 <!--index.wxml-->
-<view class="container">
-  <view  bindtap="bindViewTap" class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">您好，{{userInfo.nickName}}！首次使用请先绑定您的身份证号，谢谢！</text>
-  </view>
+<swiper indicator-dots="true" indicator-active-color="#ff0000" autoplay="true" interval="{{interval}}" duration="{{duration}}">
+    <block wx:key="dd" wx:for="{{imgUrls}}">
+        <swiper-item>
+            <image src="{{item}}" class="slide-image" width="355" height="150" />
+        </swiper-item>
+    </block>
+</swiper>
 
-
+<view class="page">
+    <view class="section" wx:key="liam" wx:for="{{news}}" wx:for-item="item">
+        <view class="img">
+            <image src="{{item.img}}"></image>
+        </view>
+        <view class="show">
+          <text class="title">{{item.title}}</text>
+          <text class="content">{{item.content}}</text>
+        </view>
+    </view>
 </view>
