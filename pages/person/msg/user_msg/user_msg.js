@@ -1,6 +1,7 @@
 var app = getApp()
 Page({
     data: {
+        host:app.globalData.host,
         content: [],
         uid: 9,
         // sex: 1,
@@ -11,49 +12,38 @@ Page({
         toView: 'aa',
         btnShowHeight: 300,
         btnShowWidth: 300,
-        scrollTop:0
+        scrollTop: 0
     },
     onLoad: function(options) {
+      wx.setNavigationBarTitle({
+          title: options.fromname
+      })
         var that = this
-        // wx.getSystemInfo({
-        //     success: function(res) {
-        //         that.setData({
-        //             scrollHeight: res.windowHeight - 50,
-        //             imgWidth: res.windowWidth - 150,
-        //             btnShowHeight: res.windowHeight,
-        //             btnShowWidth: res.windowWidth
-        //         })
-        //     }
-        // })
-        let url = 'http://127.0.0.1:8360/api/oa/get_msg_by_fromuid?fromuid=7'
-        // let url = 'http://127.0.0.1:8360/api/oa/get_msg_by_fromuid?fromuid=' + options.fromuid
+            // let url = 'http://127.0.0.1:8360/api/oa/get_msg_by_fromuid?fromuid=7'
+        let url = 'oa/get_msg_by_fromuid?fromuid=' + options.fromuid
         app.getHttpData(url, 'GET', '', '', function(msgData) {
+            console.log(msgData)
             if (msgData.errno == 0) {
-              wx.getSystemInfo({
-                  success: function(res) {
-                      that.setData({
-                          scrollHeight: res.windowHeight - 50,
-                          imgWidth: res.windowWidth - 150,
-                          btnShowHeight: res.windowHeight,
-                          btnShowWidth: res.windowWidth,
-                          sex: options.sex,
-                          content: msgData.data.reverse(),
-                          // toView: 'text4'
-                      })
-                  }
-              })
-              if (that.data.scrollTop == 0) {
-                that.setData({
-                  scrollTop:2000
+                wx.getSystemInfo({
+                    success: function(res) {
+                        that.setData({
+                            scrollHeight: res.windowHeight - 50,
+                            imgWidth: res.windowWidth - 150,
+                            btnShowHeight: res.windowHeight,
+                            btnShowWidth: res.windowWidth,
+                            sex: options.sex,
+                            content: msgData.data.reverse(),
+                        })
+                    }
                 })
-              }
-                // that.setData({
-                //     sex: options.sex,
-                //     content: msgData.data.reverse(),
-                //     toView: 'text4'
-                // })
+                if (that.data.scrollTop == 0) {
+                    that.setData({
+                        scrollTop: 2000
+                    })
+                }
             }
         })
+
     },
     tapShow: function(e) {
         this.setData({
@@ -64,7 +54,7 @@ Page({
     tapHide: function(e) {
         this.setData({
             btnShow: false
-            // toView: 'bottom'
+                // toView: 'bottom'
         })
     },
     tapIcon(e) {
@@ -73,12 +63,13 @@ Page({
             success: function(res) {
                 var tempFilePaths = res.tempFilePaths
                 wx.uploadFile({
-                    url: 'http://127.0.0.1/ispirit/im/upload2.php', //仅为示例，非真实的接口地址
+                    // url: 'http://127.0.0.1/ispirit/im/upload2.php', //仅为示例，非真实的接口地址
+                    url: 'http://127.0.0.1:8360/api/oa/upload_file', //仅为示例，非真实的接口地址
                     filePath: tempFilePaths[0],
                     name: 'ATTACHMENT',
                     formData: {
                         UPLOAD_MODE: '1',
-                        DEST_UID: '9',
+                        DEST_UID: '7',
                         MSG_CATE: 'image',
                         P_VER: '7', //对应MSG_TYPE 7定义为微信小程序发送来
                         TYPE: 'mobile'
@@ -103,10 +94,8 @@ Page({
                             toView: 'bottom',
                             content: newMsgData
                         })
-
                         var data = res.data
-
-                        //do something
+                            //do something
                     }
                 })
             }

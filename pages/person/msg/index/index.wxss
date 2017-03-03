@@ -1,4 +1,3 @@
-/*微讯页面样式*/
 .swiper-tab {
     display: flex;
     flex-direction: row;
@@ -6,37 +5,30 @@
     text-align: center;
     line-height: 100rpx;
     justify-content: center;
+    background-color: #50587d;
 }
-
 .swiper-tab-list {
     font-size: 30rpx;
     flex: 1;
-    color: #888888;
-    border-bottom: 5rpx solid #888888;
 }
-
 .on {
-    color: #09bb07;
-    border-bottom: 5rpx solid #09bb07;
+    background-color: #3468b3;
     font-weight: bold;
 }
-
 .swiper-box {
     overflow: hidden;
     padding: 20rpx 0 0 20rpx;
 }
-
 .msg{
   display: flex;
   flex-direction: row;
   padding: 30rpx 0rpx;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid #2f3658;
   align-items:center;
 }
-
 .sex{width: 80rpx;height: 80rpx;flex:2;}
 .msg-main{display: flex;flex-direction: column;flex: 5;}
 .msg-date{flex: 2;font-size: 20rpx;color: #888888;text-align: center;}
-.msg-from{font-size: 30rpx;color: #353535;margin-bottom: 10rpx;}
+.msg-from{font-size: 30rpx;color: #ffffff;margin-bottom: 10rpx;}
 .msg-content{font-size: 28rpx;color: #888888;word-break:break-all}
 .loading{padding: 40rpx;text-align: center;}

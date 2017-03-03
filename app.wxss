@@ -1,5 +1,5 @@
 /**app.wxss**/
-page{font-family: "Microsoft Yahei"}
+page{font-family: "Microsoft Yahei";background-color: #394166;font-size: 14px;color: #ffffff}
 .header{
     padding: 35rpx 0;text-align: center;border-bottom: 2rpx solid #e8e8e8
 }
@@ -11,4 +11,16 @@ page{font-family: "Microsoft Yahei"}
   justify-content: space-between;
   padding: 200rpx 0;
   box-sizing: border-box;
-} 
+}
+/*盒子模型定义 元素垂直方向排列*/
+.flex-column{
+  display: flex;flex-direction: column;
+}
+/*盒子模型定义 元素水平方向排列*/
+.flex-row{
+  display: flex;flex-direction:row;
+}
+/* 盒子模型 主轴居中*/
+.flex-main-center{justify-content: center;}
+/* 盒子模型 辅轴居中*/
+.flex-help-center{align-items: center;}

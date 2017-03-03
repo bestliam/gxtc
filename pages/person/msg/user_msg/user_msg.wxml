@@ -1,6 +1,6 @@
-<scroll-view scroll-y="true" style="height: {{scrollHeight}}px;"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+<scroll-view scroll-y="true" style="height: {{scrollHeight}}px;border-top:1px solid #2f3658" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
     <view class="one" wx:for="{{content}}" wx:key="one">
-      <text id = "text{{index}}">{{index}}</text>
+        <view class="send-time">{{item.SEND_TIME}}</view>
         <view class="me" wx:if="{{item.FROM_UID == uid}}">
             <view class="width">
                 <view class="send">
@@ -12,8 +12,8 @@
             <image class="img" src="http://wx.qlogo.cn/mmopen/vi_32/3hjusice0zQC87lFvFOZmTtxGkbF4MIuo6jXIgvicJOBUtX9U0ibQjxhPNxD6DOlUWFWr28dicDT4J5zfWJrGWSmXQ/0" background-size="cover"></image>
         </view>
         <view class="user" wx:else>
-            <image class="img" wx:if="{{sex==0}}" src="http://127.0.0.1:8360/static/img/boy.svg" background-size="cover"></image>
-            <image class="img" wx:else src="http://127.0.0.1:8360/static/img/girl.svg" background-size="cover"></image>
+            <image class="img" wx:if="{{sex==0}}" src="{{host}}static/img/boy.svg" background-size="cover"></image>
+            <image class="img" wx:else src="{{host}}static/img/girl.svg" background-size="cover"></image>
             <view class="width">
                 <view class="send">
                     <view class="rearrow"></view>
@@ -22,23 +22,22 @@
                 </view>
             </view>
         </view>
-        <view style="width:100;text-align:center;color:#cccccc">{{item.SEND_TIME}}</view>
     </view>
     <view id="bottom" wx:if="{{content.length>0}}"></view>
 </scroll-view>
 
 <view class="speak" wx:if="{{!btnShow}}" style="height:50px;background-color: #DDF0DD;">
-  <input focus="{{focus}}" />
-    <image style="width: 100rpx; height: 100rpx;" src="http://127.0.0.1:8360/static/img/plus.svg" bindtap="tapShow"></image>
+    <input focus="{{focus}}" />
+    <image style="width: 100rpx; height: 100rpx;" src="{{host}}static/img/plus.svg" bindtap="tapShow"></image>
     <button type="primary" size="mini" style="display:none">发送</button>
 </view>
 
 <view class="btn-show" style="height:{{btnShowHeight}}px;width:{{btnShowWidth}}px" wx:if="{{btnShow}}">
-    <view class="back-ground"  bindtap="tapHide"></view>
+    <view class="back-ground" bindtap="tapHide"></view>
     <view class="btn">
-        <image class="icon" src="http://127.0.0.1:8360/static/img/camera.svg" bindtap="tapIcon"></image>
-        <image class="icon" src="http://127.0.0.1:8360/static/img/file.svg" bindtap="tapIcon"></image>
-        <image class="icon" src="http://127.0.0.1:8360/static/img/location_1.svg" bindtap="tapIcon"></image>
+        <image class="icon" src="{{host}}static/img/camera.svg" bindtap="tapIcon"></image>
+        <image class="icon" src="{{host}}static/img/file.svg" bindtap="tapIcon"></image>
+        <image class="icon" src="{{host}}static/img/location_1.svg" bindtap="tapIcon"></image>
     </view>
     <view class="cancel" bindtap="tapHide">取消</view>
 </view>

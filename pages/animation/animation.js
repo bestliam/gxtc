@@ -2,47 +2,46 @@
 //获取应用实例
 var app = getApp()
 Page({
-  data: {
-    userInfo: {}
-  },
-  onLoad: function () {
-    wx.showToast({
-        title: '加载中...',
-        icon: 'loading',
-        duration: 5000
-      })
-    let that = this
-    //调用登录接口
-    app.getUserInfo(function (userInfo) {
-      wx.hideToast()
-      if (userInfo.errno >0) {
-          wx.showModal({
-          title: '提示',
-          content: '远端服务器通讯故障，请稍后重试',
-          showCancel: false,
+    data: {},
+    redirectTo(){
+      if (app.globalData.userInfo.GH) {
+          wx.switchTab({
+              url: '/pages/person/index/index'
+          })
+      } else {
+          wx.redirectTo({
+              url: '../register/register?register=false'
+          })
+      }
+    },
+    onLoad() {
+        wx.showToast({
+            title: '加载中...',
+            icon: 'loading',
+            duration: 5000
         })
-      }else{
-        that.setData({
-          userInfo: userInfo,
-        })
-        if (userInfo.register) {
-          setTimeout(function(){wx.switchTab({ url: '../index/index' })},500)
+        let userInfo = wx.getStorageSync('userInfo') || [];
+        //过期时间是半小时 1000*60*30
+        let expire_in = Date.now() - userInfo.expire;
+        if (expire_in < 1800000) {
+            app.globalData.userInfo = userInfo
+            this.redirectTo()
         } else {
-          wx.redirectTo({url:'../register/register?register=false'})
+            let that = this
+                //调用登录接口
+            app.getUserInfo(function(userInfo) {
+                wx.hideToast()
+                if (userInfo.errno > 0) {
+                    wx.showModal({
+                        title: '提示',
+                        content: '与远程服务器通讯出现故障,请检查网络或稍后重试',
+                        showCancel: false,
+                    })
+                } else {
+                  that.redirectTo()
+                }
+            })
         }
-        }
-    })
-  },
-  onReady: function () {
-    // 页面渲染完成
-  },
-  onShow: function () {
-    // 页面显示
-  },
-  onHide: function () {
-    // 页面隐藏
-  },
-  onUnload: function () {
-    // 页面关闭
-  }
+
+    }
 })

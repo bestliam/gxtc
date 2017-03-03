@@ -1,0 +1,37 @@
+.user-info{margin: 20rpx 0;height: 180rpx;background-color: #50587d;width: 100%}
+.user-info .c{flex:1;text-align: center;height: 178rpx}
+.user-avatar {
+  width: 250rpx;
+  height: 250rpx;
+  border-radius: 50%;
+  border: 10px solid #50c4f7;
+  margin: 20px 0;
+}
+.user-title{color: #8790b1;font-size: 12px;margin-bottom: 10rpx}
+.container{
+  flex-direction: row;
+  padding: 50rpx;
+  flex-wrap: wrap;
+  justify-content:space-between;
+}
+.title{font-size: 28rpx;color: #ffffff;text-align: center;}
+.app{
+  margin:40rpx 20rpx;
+  position:relative;
+}
+.app-icon{width: 100rpx;height: 100rpx}
+.count{
+  font-weight:bold;
+  position: absolute;
+  right: -14rpx;
+  top: -10rpx;
+  background-color: #E84E6A;
+  min-width: 20rpx;
+  height: 20rpx;
+  border-radius: 20rpx;
+  line-height: 20rpx;
+  text-align: center;
+  color: #ffffff;
+  padding: 10rpx;
+  font-size: 20rpx;
+}

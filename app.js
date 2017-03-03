@@ -17,13 +17,20 @@ App({
    * */
   getHttpData: function (url, method, header, data, cb) {
     let headerData = header || { 'content-type': 'application/json' }
+    let fullUrl = this.globalData.host + 'api/' + url
     wx.request({
-      url: url,
+      url: fullUrl,
       data: data,
       header: headerData,
       method: method,
       success: function (res) {
-        cb(res.data);
+        if (res.data.errno == 10002) {
+          wx.redirectTo({
+              url: '/pages/animation/animation'
+          })
+        }else {
+          cb(res.data);
+        }
       },
       fail:function () {
         console.log("远程数据连接不上")
@@ -42,17 +49,17 @@ App({
           wx.getUserInfo({
             success: function (res) {
               that.globalData.userInfo = res.userInfo
-              let url = that.globalData.hostName + 'wx/get_access_token'
+              let url = that.globalData.host + 'api/wx/get_access_token'
               let postData = {
                 code: data.code,
                 tntid: that.globalData.tntid
               }
               //查看本地是否存在旧的access_token，如果存在则一起发送到服务器去删除缓存数据，并生成新的access_token
-              let access_token = wx.getStorageSync("access_token")
+              // let access_token = wx.getStorageSync("access_token")
               let headerData = { 'content-type': 'application/json' }
-              if (access_token) {
-                headerData={access_token:access_token}
-              }
+              // if (access_token) {
+              //   headerData={access_token:access_token}
+              // }
               //调用远端api，获取access_token并写入缓存
               wx.request({
                 url: url,
@@ -60,14 +67,17 @@ App({
                 header: headerData,
                 method: 'POST',
                 success: function (resData) {
-                  if (resData.data.data.register) {
-                    that.globalData.userInfo.register = resData.data.data.register
+                  if (resData.data.data.GH) {
+                    that.globalData.userInfo.GH = resData.data.data.GH
+                    that.globalData.userInfo.XM = resData.data.data.XM
+                    that.globalData.userInfo.ROLE = resData.data.data.ROLE
+                    that.globalData.userInfo.ACCESS_TOKEN = resData.data.data.access_token
+                    that.globalData.userInfo.expire = Date.now()
                     }
                   //写入缓存
-                  if (resData.data.data.access_token) {
-                    wx.setStorageSync('access_token', resData.data.data.access_token)
-                  }
-
+                  // if (resData.data.data.access_token) {
+                    wx.setStorageSync('userInfo', that.globalData.userInfo)
+                  // }
                   typeof cb == "function" && cb(that.globalData.userInfo)
                 },
                 fail:function(){
@@ -82,7 +92,8 @@ App({
   },
   globalData: {
     userInfo: null,
-    hostName: 'http://127.0.0.1:8360/api/',
+    host: 'http://127.0.0.1:8360/',  //测试地址
+    // host: 'https://api.gxtc.edu.cn/',   //线上地址
     tntid: 'tntc409e8fede7211b2'
   }
 })

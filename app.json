@@ -1,33 +1,41 @@
 {
   "pages":[
-    "pages/server/msg/user_msg/user_msg",
-    "pages/server/msg/msg",
     "pages/animation/animation",
-    "pages/index/index",
-    "pages/logs/logs",
     "pages/register/register",
-    "pages/server/server"
+
+    "pages/person/index/index",
+    "pages/person/msg/index/index",
+    "pages/person/msg/user_msg/user_msg",
+
+    "pages/index/index",
+    "pages/logs/logs"
   ],
   "tabBar": {
-    "backgroundColor":"#ffffff",
-    "borderStyle":"white",
-    "color":"#353535",
-    "selectedColor": "#09bb07",
+    "backgroundColor":"#2f3658",
+    "borderStyle":"",
+    "color":"#ffffff",
+    "selectedColor": "#cc324c",
     "list": [{
-      "iconPath":"images/index.png",
-      "selectedIconPath":"images/index-actived.png",
-      "pagePath": "pages/index/index",
-      "text": "首页"
-    }, {
-      "iconPath":"images/server.png",
-      "selectedIconPath":"images/server-actived.png",
-      "pagePath": "pages/server/server",
-      "text": "服务"
+      "iconPath":"images/person.png",
+      "selectedIconPath":"images/person-actived.png",
+      "pagePath": "pages/person/index/index",
+      "text": "个人"
+    },{
+      "iconPath":"images/org.png",
+      "selectedIconPath":"images/org-actived.png",
+      "pagePath": "pages/person1/person1",
+      "text": "组织"
+    },{
+      "iconPath":"images/more.png",
+      "selectedIconPath":"images/more-actived.png",
+      "pagePath": "pages/person2/person2",
+      "text": "更多"
     }]
   },
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#09bb07",
+    "backgroundColor":"#EEEEEE",
+    "navigationBarBackgroundColor": "#394166",
     "navigationBarTitleText": "广西师范学院智慧校园服务",
     "navigationBarTextStyle":"white"
   }
