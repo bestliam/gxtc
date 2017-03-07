@@ -20,21 +20,9 @@ Page({
             loadShow: true
         })
         let page = that.data.currentPage + 1
-            //重新获取新的数据
-        let url ='oa/get_msg?currentPage=' + page //'http://127.0.0.1:8360/api/oa/get_msg?currentPage=2&numsPerPage=6'
-        let oldData = that.data.msgItem;
-        app.getHttpData(url, 'GET', '', '', function(msgData) {
-            for (var i = 0; i < msgData.data.length; i++) {
-                oldData.push(msgData.data[i])
-            }
-            that.setData({
-                msgItem: oldData,
-                loadShow: false,
-                currentPage: page
-            })
-        })
+        //重新获取新的数据
+        that.getMsg(page)
     },
-
     onLoad: function() {
         var that = this
         //获取系统信息
@@ -47,14 +35,27 @@ Page({
                 })
             }
         })
-        let url = 'oa/get_msg?currentPage=1'
-        app.getHttpData(url, 'GET', '', '', function(msgData) {
-            if (msgData.errno == 0) {
-                that.setData({
-                    msgItem: msgData.data
-                })
+        that.getMsg(1)
+    },
+    // 获取数据
+    getMsg(page){
+      let that = this
+      let oldData = that.data.msgItem;
+      // let url = 'oa/get_msg?currentPage='+page
+      let url = 'oa/get_msg'
+      app.getHttpData(url, 'POST', '', function(msgData) {
+          console.log(msgData)
+          if (msgData.data.length > 0) {
+            for (var i = 0; i < msgData.data.length; i++) {
+                oldData.push(msgData.data[i])
             }
-        })
+            that.setData({
+                msgItem: oldData,
+                loadShow: false,
+                currentPage: page
+            })
+          }
+      })
     },
     /**
      * 滑动切换tab
@@ -64,15 +65,10 @@ Page({
         that.setData({
             currentTab: e.detail.current
         })
-
     },
-    /**
-     * 点击tab切换
-     */
+    //点击tab切换
     swichNav: function(e) {
-
         var that = this;
-
         if (this.data.currentTab === e.target.dataset.current) {
             return false;
         } else {

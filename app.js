@@ -15,8 +15,11 @@ App({
    * cb callback函数，返回数据
    * 调用方式  getHttpDa
    * */
-  getHttpData: function (url, method, header, data, cb) {
-    let headerData = header || { 'content-type': 'application/json' }
+  getHttpData: function (url, method, data, cb) {
+    let headerData = { 'content-type': 'application/json' }
+    if (this.globalData.userInfo.ACCESS_TOKEN) {
+      headerData = {'access_token':this.globalData.userInfo.ACCESS_TOKEN}
+    }
     let fullUrl = this.globalData.host + 'api/' + url
     wx.request({
       url: fullUrl,
@@ -69,10 +72,11 @@ App({
                 success: function (resData) {
                   if (resData.data.data.GH) {
                     that.globalData.userInfo.GH = resData.data.data.GH
+                    that.globalData.userInfo.UID = resData.data.data.UID
                     that.globalData.userInfo.XM = resData.data.data.XM
                     that.globalData.userInfo.ROLE = resData.data.data.ROLE
                     that.globalData.userInfo.ACCESS_TOKEN = resData.data.data.access_token
-                    that.globalData.userInfo.expire = Date.now()
+                    that.globalData.userInfo.EXPIRE = Date.now()
                     }
                   //写入缓存
                   // if (resData.data.data.access_token) {
