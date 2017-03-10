@@ -1,24 +1,25 @@
-<scroll-view scroll-y="true" style="height: {{scrollHeight}}px;border-top:1px solid #2f3658" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+<scroll-view scroll-y="true" bindscrolltoupper="refresh" style="height: {{scrollHeight}}px;border-top:1px solid #2f3658" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+    <view class="loading" wx:if="{{loadingShow}}">{{loadingMsg}}</view>
     <view class="one" wx:for="{{content}}" wx:key="one">
-        <view class="send-time">{{item.SEND_TIME}}</view>
-        <view class="me" wx:if="{{item.FROM_UID == uid}}">
+        <view class="send-time">{{item.send_time}}</view>
+        <view class="me flex-row" wx:if="{{item.msg_from == '1'}}">
             <view class="width">
                 <view class="send">
                     <view class="arrow"></view>
-                    <image wx:if="{{item.CONTENT_TYPE=='image'}}" src="{{item.CONTENT}}" mode="aspectFit" style="max-width:{{imgWidth}}px" bindtap="previewImage" data-url="{{item.CONTENT}}"></image>
-                    <text wx:else>{{item.CONTENT}}</text>
+                    <image wx:if="{{item.msg_cate=='image'}}" src="{{item.url}}" mode="aspectFit" style="max-width:{{imgWidth}}px" bindtap="previewImage" data-url="{{item.CONTENT}}"></image>
+                    <text wx:else>{{item.content}}</text>
                 </view>
             </view>
-            <image class="img" src="http://wx.qlogo.cn/mmopen/vi_32/3hjusice0zQC87lFvFOZmTtxGkbF4MIuo6jXIgvicJOBUtX9U0ibQjxhPNxD6DOlUWFWr28dicDT4J5zfWJrGWSmXQ/0" background-size="cover"></image>
+            <image class="img" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
         </view>
-        <view class="user" wx:else>
-            <image class="img" wx:if="{{sex==0}}" src="{{host}}static/img/boy.svg" background-size="cover"></image>
+        <view class="user flex-row" wx:else>
+            <image class="img" wx:if="{{item.avatar=='0'}}" src="{{host}}static/img/boy.svg" background-size="cover"></image>
             <image class="img" wx:else src="{{host}}static/img/girl.svg" background-size="cover"></image>
             <view class="width">
                 <view class="send">
                     <view class="rearrow"></view>
-                    <image wx:if="{{item.CONTENT_TYPE=='image'}}" src="{{item.CONTENT}}" mode="aspectFit" style="max-width:{{imgWidth}}px" bindtap="previewImage" data-url="{{item.CONTENT}}"></image>
-                    <text wx:else>{{item.CONTENT}}</text>
+                    <image wx:if="{{item.msg_cate=='image'}}" src="{{item.url}}" mode="aspectFit" style="max-width:{{imgWidth}}px" bindtap="previewImage" data-url="{{item.CONTENT}}"></image>
+                    <text wx:else>{{item.content}}</text>
                 </view>
             </view>
         </view>
@@ -26,15 +27,15 @@
     <view id="bottom" wx:if="{{content.length>0}}"></view>
 </scroll-view>
 
-<view class="speak" wx:if="{{!btnShow}}" style="height:50px;background-color: #DDF0DD;">
+<view class="speak flex-row flex-help-center" wx:if="{{!btnShow}}" style="">
     <input focus="{{focus}}" />
-    <image style="width: 100rpx; height: 100rpx;" src="{{host}}static/img/plus.svg" bindtap="tapShow"></image>
-    <button type="primary" size="mini" style="display:none">发送</button>
+    <image style="width: 60rpx; height: 60rpx;" src="{{host}}static/img/plus.svg" bindtap="tapShow"></image>
+    <button type="" size="mini">发送</button>
 </view>
 
-<view class="btn-show" style="height:{{btnShowHeight}}px;width:{{btnShowWidth}}px" wx:if="{{btnShow}}">
+<view class="btn-show flex-column" style="height:{{btnShowHeight}}px;width:{{btnShowWidth}}px" wx:if="{{btnShow}}">
     <view class="back-ground" bindtap="tapHide"></view>
-    <view class="btn">
+    <view class="btn flex-row flex-main-center flex-help-center">
         <image class="icon" src="{{host}}static/img/camera.svg" bindtap="tapIcon"></image>
         <image class="icon" src="{{host}}static/img/file.svg" bindtap="tapIcon"></image>
         <image class="icon" src="{{host}}static/img/location_1.svg" bindtap="tapIcon"></image>

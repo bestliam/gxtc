@@ -10,8 +10,7 @@ Page({
         // tab切换
         currentTab: 0,
         msgItem: [],
-        loadShow: false,
-        currentPage: 1,
+        currentPage: 0,
         host:'',
     },
     lower: function() {
@@ -35,24 +34,27 @@ Page({
                 })
             }
         })
-        that.getMsg(1)
+        that.getMsg(that.currentTab)
     },
     // 获取数据
-    getMsg(page){
+    getMsg(currentTab){
       let that = this
-      let oldData = that.data.msgItem;
-      // let url = 'oa/get_msg?currentPage='+page
-      let url = 'oa/get_msg'
-      app.getHttpData(url, 'POST', '', function(msgData) {
+      let url =''
+      if (currentTab == 1) {
+        url = 'oa/group_list'
+      }else {
+        url = 'oa/im_recent'
+      }
+      app.getHttpData(url, 'GET', '', function(msgData) {
           console.log(msgData)
           if (msgData.data.length > 0) {
-            for (var i = 0; i < msgData.data.length; i++) {
-                oldData.push(msgData.data[i])
-            }
+              for (var i = 0; i < msgData.data.length; i++) {
+                if (msgData.data[i].content && msgData.data[i].content.substring(0,4)=='[im]') {
+                  msgData.data[i].content = '[图片]'
+                }
+              }
             that.setData({
-                msgItem: oldData,
-                loadShow: false,
-                currentPage: page
+                msgItem: msgData.data,
             })
           }
       })
@@ -65,6 +67,7 @@ Page({
         that.setData({
             currentTab: e.detail.current
         })
+        that.getMsg(e.detail.current)
     },
     //点击tab切换
     swichNav: function(e) {

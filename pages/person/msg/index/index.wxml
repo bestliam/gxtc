@@ -1,4 +1,4 @@
-<view class="swiper-tab">
+<view class="swiper-tab flex-row flex-main-center">
     <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">会话</view>
     <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">群组</view>
 </view>
@@ -7,13 +7,15 @@
         <!-- 滚动区域 -->
         <scroll-view scroll-y="true" style="height:{{winHeight - 52}}px" bindscrolltolower="lower" scroll-into-view="red" scroll-top="100">
             <view wx:key="msgItem" wx:for="{{msgItem}}">
-                <navigator class="msg" url="../user_msg/user_msg?sex={{item.avatar}}&fromuid={{item.uid}}&fromname={{item.user_name}}">
-                    <image class="sex" wx:if="{{item.avatar==0}}" src="{{host}}static/img/boy.svg"></image>
-                    <image class="sex" wx:else src="{{host}}static/img/girl.svg"></image>
-                    <view class="msg-main">
-                        <text class="msg-from">{{item.user_name}}</text>
+                <navigator class="msg flex-row flex-help-center" url="../user_msg/user_msg?fromuid={{item.uid}}&fromname={{item.user_name}}">
+                    <image class="sex" wx:if="{{item.avatar=='0'}}" src="{{host}}static/img/boy.svg"></image>
+                    <image class="sex" wx:elif="{{item.avatar=='1'}}" src="{{host}}static/img/girl.svg"></image>
+                    <image class="sex" wx:else src="{{host}}static/img/group.svg"></image>
+                    <view class="msg-main flex-column">
+                        <text class="msg-from">{{item.user_name||item.group_name}}</text>
                         <text class="msg-content">{{item.content}}</text>
                     </view>
+                    <text class="count" wx:if="{{item.count_msg>0}}">{{item.count_msg}}</text>
                     <text class="msg-date">{{item.send_time}}</text>
                 </navigator>
             </view>
@@ -23,8 +25,18 @@
 
     </swiper-item>
     <!-- 我是呵呵 -->
-    <swiper-item>
-        <view>//TODO FUNCTION</view>
+    <swiper-item class="un-read">
+        <view wx:key="msgItem" wx:for="{{msgItem}}">
+            <navigator class="msg flex-row flex-help-center" url="#">
+                <image class="sex" src="{{host}}static/img/boy.svg"></image>
+                <view class="msg-main flex-column">
+                    <text class="msg-from">{{item.group_name}}</text>
+                    <text class="msg-content">{{item.remark}}</text>
+                </view>
+                <text class="count" wx:if="{{item.count_msg>0}}">{{item.count_msg}}</text>
+                <text class="msg-date">{{item.send_time}}</text>
+            </navigator>
+        </view>
     </swiper-item>
     <!-- 我是嘿嘿 -->
 

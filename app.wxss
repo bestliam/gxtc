@@ -24,3 +24,17 @@ page{font-family: "Microsoft Yahei";background-color: #394166;font-size: 14px;co
 .flex-main-center{justify-content: center;}
 /* 盒子模型 辅轴居中*/
 .flex-help-center{align-items: center;}
+/* 数量提醒 */
+.count{
+  font-weight:bold;
+  background-color: #E84E6A;
+  min-width: 20rpx;
+  height: 20rpx;
+  border-radius: 20rpx;
+  line-height: 20rpx;
+  text-align: center;
+  color: #ffffff;
+  padding: 10rpx;
+  font-size: 20rpx;
+}
+.loading{padding: 40rpx;text-align: center;}

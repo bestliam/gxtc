@@ -4,17 +4,17 @@
 .user .send{background-color: #DDF0DD;color: #353535;float: left;word-break:break-all;}
 .send .arrow {position: absolute;top: 12px;right: -16px;width: 0;height: 0;font-size: 0;border: solid 8px;border-color: #394166 #394166 #394166 #50587d;}
 .send .rearrow {position: absolute;top: 17px;left: -16px;width: 0;height: 0;font-size: 0;border: solid 8px;border-color: #394166 #DDF0DD #394166 #394166;}
-.me,.user{display:flex;flex-direction: row;justify-content: flex-end;}
+.me,.user{justify-content: flex-end;}
 .img {width: 120rpx;height: 120rpx;margin: 0 0 0 40rpx;border-radius: 50%;}
 .user .img {margin: 0 40rpx 0 0;}
 
-.speak{display: flex;flex-direction: row;align-items: center;padding: 0 10px}
-input{border-bottom: 1px solid #48C23D;height: 29px;flex:1}
+.speak{height:50px;background-color: #3468B3;padding: 0 10px}
+input{border-bottom: 1px solid #ffffff;height: 29px;flex:1}
 button{margin-left: 10rpx;}
 
-.btn-show{display: flex;flex-direction: column;position: absolute;left: 0;top:0;}
+.btn-show{position: absolute;left: 0;top:0;}
 .back-ground{flex: 7;background-color: #000000;opacity:0.6}
-.btn{flex:2;background-color: #ffffff;display: flex;flex-direction:row;justify-content:center;align-items: center;opacity:1}
+.btn{flex:2;background-color: #ffffff;opacity:1}
 .icon{width: 120rpx;height: 120rpx;margin: 30rpx}
-.cancel{height: 150rpx;line-height: 150rpx;text-align: center;}
+.cancel{height: 110rpx;line-height: 110rpx;text-align: center;background-color: #3468B3}
 .send-time{width:100;text-align:center;color:#cccccc;margin-bottom: 10rpx}

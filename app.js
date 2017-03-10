@@ -28,8 +28,10 @@ App({
       method: method,
       success: function (res) {
         if (res.data.errno == 10002) {
-          wx.redirectTo({
-              url: '/pages/animation/animation'
+          this.getUserInfo(function(userInfo){
+            wx.redirectTo({
+                url: '/pages/animation/animation'
+            })
           })
         }else {
           cb(res.data);
@@ -48,6 +50,9 @@ App({
     } else {
       //调用登录接口
       wx.login({
+        fail:function(data){
+          console.log("微信登陆失败：",data)
+        },
         success: function (data) {
           wx.getUserInfo({
             success: function (res) {
