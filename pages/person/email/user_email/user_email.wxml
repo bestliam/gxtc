@@ -1,0 +1,77 @@
+<view class="box flex-column">
+    <text class="e-title">邮件标题</text>
+    <view class="user">发件人：亲信和</view>
+    <view class="user">收件人：亲信和 浪尖 徐云彩</view>
+    <view class="user">发送日期：2016年3月22日</view>
+</view>
+<scroll-view scroll-y="true" style="width: 100%;height:800px">
+    <view class="box flex-column">
+        <text class="e-content">邮件标题发件人：亲信和发件人：亲信和发件人：亲信和发件人：亲信和发件人：亲信和发件人：亲信和发件人：亲信和发件人：亲信和发件人：亲信和</text>
+        <view class="flex-column">
+            <view class="e-attach flex-row flex-help-center">
+                <image class="e-attach-icon" src="http://127.0.0.1:8360/static/img/xls.svg"></image>
+                <view class="flex-column">
+                    <text>附件1标题</text>
+                    <text>附件1大小</text>
+                </view>
+            </view>
+            <view class="e-attach flex-row flex-help-center">
+                <image class="e-attach-icon" src="http://127.0.0.1:8360/static/img/xls.svg"></image>
+                <view class="flex-column">
+                    <text>附件1标题</text>
+                    <text>附件1大小</text>
+                </view>
+            </view>
+            <view class="e-attach flex-row flex-help-center">
+                <image class="e-attach-icon" src="http://127.0.0.1:8360/static/img/xls.svg"></image>
+                <view class="flex-column">
+                    <text>附件1标题</text>
+                    <text>附件1大小</text>
+                </view>
+            </view>
+            <view class="e-attach flex-row flex-help-center">
+                <image class="e-attach-icon" src="http://127.0.0.1:8360/static/img/xls.svg"></image>
+                <view class="flex-column">
+                    <text>附件1标题</text>
+                    <text>附件1大小</text>
+                </view>
+            </view>
+            <view class="e-attach flex-row flex-help-center">
+                <image class="e-attach-icon" src="http://127.0.0.1:8360/static/img/xls.svg"></image>
+                <view class="flex-column">
+                    <text>附件1标题</text>
+                    <text>附件1大小</text>
+                </view>
+            </view>
+            <view class="e-attach flex-row flex-help-center">
+                <image class="e-attach-icon" src="http://127.0.0.1:8360/static/img/xls.svg"></image>
+                <view class="flex-column">
+                    <text>附件1标题</text>
+                    <text>附件1大小</text>
+                </view>
+            </view>
+            <view class="e-attach flex-row flex-help-center">
+                <image class="e-attach-icon" src="http://127.0.0.1:8360/static/img/xls.svg"></image>
+                <view class="flex-column">
+                    <text>附件1标题</text>
+                    <text>附件1大小</text>
+                </view>
+            </view>
+            <view class="e-attach flex-row flex-help-center">
+                <image class="e-attach-icon" src="http://127.0.0.1:8360/static/img/xls.svg"></image>
+                <view class="flex-column">
+                    <text>附件1标题</text>
+                    <text>附件1大小</text>
+                </view>
+            </view>
+            <view class="e-attach flex-row flex-help-center">
+                <image class="e-attach-icon" src="http://127.0.0.1:8360/static/img/xls.svg"></image>
+                <view class="flex-column">
+                    <text>附件1标题</text>
+                    <text>附件1大小</text>
+                </view>
+            </view>
+
+        </view>
+    </view>
+</scroll-view>

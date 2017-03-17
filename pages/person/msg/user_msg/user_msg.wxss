@@ -12,7 +12,7 @@
 input{border-bottom: 1px solid #ffffff;height: 29px;flex:1}
 button{margin-left: 10rpx;}
 
-.btn-show{position: absolute;left: 0;top:0;}
+.btn-show{position: absolute;left: 0;top:0;z-index: 99}
 .back-ground{flex: 7;background-color: #000000;opacity:0.6}
 .btn{flex:2;background-color: #ffffff;opacity:1}
 .icon{width: 120rpx;height: 120rpx;margin: 30rpx}

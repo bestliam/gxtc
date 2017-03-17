@@ -1,7 +1,8 @@
-<scroll-view scroll-y="true" bindscrolltoupper="refresh" style="height: {{scrollHeight}}px;border-top:1px solid #2f3658" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+<scroll-view scroll-y="true" bindscrolltoupper="refresh" style="height: {{scrollHeight}}px;border-top:1px solid #2f3658" scroll-into-view="{{toView}}">
     <view class="loading" wx:if="{{loadingShow}}">{{loadingMsg}}</view>
     <view class="one" wx:for="{{content}}" wx:key="one">
-        <view class="send-time">{{item.send_time}}</view>
+
+        <view id="a{{item.q_id}}" class="send-time">{{item.send_time}}</view>
         <view class="me flex-row" wx:if="{{item.msg_from == '1'}}">
             <view class="width">
                 <view class="send">
@@ -23,14 +24,15 @@
                 </view>
             </view>
         </view>
+
     </view>
-    <view id="bottom" wx:if="{{content.length>0}}"></view>
+
 </scroll-view>
 
-<view class="speak flex-row flex-help-center" wx:if="{{!btnShow}}" style="">
-    <input focus="{{focus}}" />
-    <image style="width: 60rpx; height: 60rpx;" src="{{host}}static/img/plus.svg" bindtap="tapShow"></image>
-    <button type="" size="mini">发送</button>
+<view class="speak flex-row flex-help-center">
+    <input bindinput="listenerInput" value="{{msgStr}}" />
+    <image style="width: 60rpx; height: 60rpx;" src="{{host}}static/img/plus.svg" bindtap="tapShow" wx:if="{{msgStr==''}}"></image>
+    <button bindtap="send" size="mini" wx:else>发送</button>
 </view>
 
 <view class="btn-show flex-column" style="height:{{btnShowHeight}}px;width:{{btnShowWidth}}px" wx:if="{{btnShow}}">

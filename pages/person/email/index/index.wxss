@@ -1,0 +1,27 @@
+.swiper-tab {
+    width: 100%;
+    text-align: center;
+    line-height: 100rpx;
+    background-color: #50587d;
+}
+.swiper-tab-list {
+    font-size: 30rpx;
+    flex: 1;
+}
+.on {
+    background-color: #3468b3;
+    font-weight: bold;
+}
+.swiper-box {
+    overflow: hidden;
+    /*padding: 20rpx 0 0 20rpx;*/
+}
+.msg{
+  padding: 30rpx 30rpx;
+  border-bottom: 1px solid #2f3658;
+}
+.attachment{width: 40rpx;height: 40rpx}
+.msg-main{flex: 6;}
+.msg-date{width: 130rpx;font-size: 20rpx;color: #ffffff;text-align: center;}
+.msg-from{font-size: 30rpx;color: #ffffff;margin-bottom: 10rpx;}
+.msg-content{font-size: 28rpx;color: #888888;word-break:break-all}

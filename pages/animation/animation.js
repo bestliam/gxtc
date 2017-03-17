@@ -23,7 +23,7 @@ Page({
         let userInfo = wx.getStorageSync('userInfo') || [];
         //过期时间是半小时 1000*60*30
         let expire_in = Date.now() - userInfo.EXPIRE;
-        if (expire_in < 1800000) {
+        if (expire_in < 7200000) {
             app.globalData.userInfo = userInfo
             this.redirectTo()
         } else {

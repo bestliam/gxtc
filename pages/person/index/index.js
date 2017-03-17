@@ -11,7 +11,7 @@ Page({
     click_app(e) {
         switch (e.currentTarget.dataset.app) {
             case 'oa_email':
-                console.log('邮件')
+                wx.navigateTo({url: '../email/index/index'})
                 break;
             case 'oa_message':
                 wx.navigateTo({url: '../msg/index/index'})
@@ -26,7 +26,7 @@ Page({
             userInfo: app.globalData.userInfo
         })
         let that = this
-        app.getHttpData('wx/get_app_info', 'GET', '', function(data) {
+        app.getHttpData(true,'wx/get_app_info', 'GET', '', function(data) {
             if (data.errno == 0) {
                 that.setData({
                     appList: data.data

@@ -1,0 +1,42 @@
+<view class="swiper-tab flex-row flex-main-center">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">收件箱</view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">发件箱</view>
+</view>
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight-50}}px" bindchange="bindChange">
+    <swiper-item class="un-read">
+        <!-- 滚动区域 -->
+        <scroll-view scroll-y="true" style="height:{{winHeight-50}}px" bindscrolltolower="lower">
+            <view wx:key="msgItem" wx:for="{{list}}">
+                <navigator class="msg flex-row flex-help-center" url="../user_email/user_email?EMAIL_ID={{item.q_id}}">
+                    <view class="msg-main flex-column">
+                        <text class="msg-from">{{item.from_name}}</text>
+                        <text class="msg-content">{{item.subject}}</text>
+                    </view>
+                    <text class="count" wx:if="{{item.read_flag=='0'}}">未读</text>
+                    <text class="msg-date">{{item.send_time}}</text>
+                    <image wx:if="{{item.has_attachment=='1'}}" class="attachment" model="widthFix" src="{{host}}static/img/attachment.svg"></image>
+                </navigator>
+            </view>
+            <view class="loading" wx:if="{{loadShow}}">数据加载中...</view>
+        </scroll-view>
+    </swiper-item>
+    <!-- 我是呵呵 -->
+    <swiper-item class="un-read">
+        <!-- 滚动区域 -->
+        <scroll-view scroll-y="true" style="height:{{winHeight-50}}px" bindscrolltolower="lower">
+            <view wx:key="msgItem" wx:for="{{sendList}}">
+                <navigator class="msg flex-row flex-help-center" url="../user_email/user_email?EMAIL_ID={{item.q_id}}">
+                    <view class="msg-main flex-column">
+                        <text class="msg-from">{{item.from_name}}</text>
+                        <text class="msg-content">{{item.subject}}</text>
+                    </view>
+                    <text class="count" wx:if="{{item.read_flag=='0'}}">未读</text>
+                    <text class="msg-date">{{item.send_time}}</text>
+                    <image wx:if="{{item.has_attachment=='1'}}" class="attachment" model="widthFix" src="{{host}}static/img/attachment.svg"></image>
+                </navigator>
+            </view>
+            <view class="loading" wx:if="{{loadShow}}">数据加载中...</view>
+        </scroll-view>
+    </swiper-item>
+    <!-- 我是嘿嘿 -->
+</swiper>

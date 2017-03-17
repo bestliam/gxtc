@@ -15,18 +15,12 @@ Page({
       })
     } else {
       //进行用户绑定
-      wx.showToast({
-        title: '加载中...',
-        icon: 'loading',
-        duration: 2000
-      })
       let access_token = wx.getStorageSync('access_token')
       let header = {access_token:access_token}
       let data = { sfzh: e.detail.value.sfzh}
       //调用接口
       let url = app.globalData.hostName + 'wx/wx_register'
-      app.getHttpData(url,'POST',header,data,function(res){
-        wx.hideToast()
+      app.getHttpData(true,url,'POST',header,data,function(res){
         if (res.errno > 0) {
           wx.showModal({
             title: '提示',

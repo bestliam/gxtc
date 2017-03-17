@@ -11,7 +11,7 @@ Page({
         currentTab: 0,
         msgItem: [],
         currentPage: 0,
-        host:'',
+        host:app.globalData.host,
     },
     lower: function() {
         var that = this
@@ -30,7 +30,6 @@ Page({
                 that.setData({
                     winWidth: res.windowWidth,
                     winHeight: res.windowHeight,
-                    host: app.globalData.host
                 })
             }
         })
@@ -45,8 +44,7 @@ Page({
       }else {
         url = 'oa/im_recent'
       }
-      app.getHttpData(url, 'GET', '', function(msgData) {
-          console.log(msgData)
+      app.getHttpData(true,url, 'GET', '', function(msgData) {
           if (msgData.data.length > 0) {
               for (var i = 0; i < msgData.data.length; i++) {
                 if (msgData.data[i].content && msgData.data[i].content.substring(0,4)=='[im]') {
