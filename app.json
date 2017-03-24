@@ -1,12 +1,13 @@
 {
   "pages":[
-    "pages/person/email/user_email/user_email",
     "pages/animation/animation",
     "pages/register/register",
     "pages/person/index/index",
     "pages/person/msg/index/index",
     "pages/person/msg/user_msg/user_msg",
     "pages/person/email/index/index",
+    "pages/person/email/user_email/user_email",
+    "pages/person/email/send_email/send_email",
     "pages/logs/logs"
   ],
   "tabBar": {

@@ -10,7 +10,7 @@ var getList = function(that, url) {
             if (msgData.errno == 0) {
                 //判断是否是最后一页
                 if (msgData.data.data) {
-                    // todo：更新上一页数据
+                    // 更新上一页数据
                     let pages = getCurrentPages()
                     //更新已经打开的页面
                     // pages[1].getMsg(0)

@@ -1,77 +1,33 @@
-<view class="box flex-column">
-    <text class="e-title">邮件标题</text>
-    <view class="user">发件人：亲信和</view>
-    <view class="user">收件人：亲信和 浪尖 徐云彩</view>
-    <view class="user">发送日期：2016年3月22日</view>
+<view class="flex-row" style="padding:20rpx 40rpx">
+    <button type="primary" size="mini" plain="true" bindtap="sendEmail" data-action="reply"> 回复 </button>
+    <view style="flex:1"></view>
+    <button type="primary" size="mini" plain="true" bindtap="sendEmail" data-action="forward"> 转发 </button>
+    <view style="flex:1"></view>
+    <button type="warn" size="mini" plain="true" bindtap="delEmail"> 删除 </button>
 </view>
-<scroll-view scroll-y="true" style="width: 100%;height:800px">
+<view class="box flex-column">
+    <text class="e-title">{{emailData.subject}}</text>
+    <view class="user">发件人：{{emailData.from_name}}</view>
+    <view class="user">发送日期：{{emailData.send_time}}</view>
+</view>
+<scroll-view scroll-y="true" style="width: 100%;height:{{scrollHeight}}px">
     <view class="box flex-column">
-        <text class="e-content">邮件标题发件人：亲信和发件人：亲信和发件人：亲信和发件人：亲信和发件人：亲信和发件人：亲信和发件人：亲信和发件人：亲信和发件人：亲信和</text>
-        <view class="flex-column">
-            <view class="e-attach flex-row flex-help-center">
-                <image class="e-attach-icon" src="http://127.0.0.1:8360/static/img/xls.svg"></image>
-                <view class="flex-column">
-                    <text>附件1标题</text>
-                    <text>附件1大小</text>
+        <text class="e-content">{{emailData.content||'无内容'}}</text>
+        <view class="flex-column" wx:if="{{emailData.attachment}}">
+            <view wx:for="{{emailData.attachment}}" wx:key="{{index}}">
+                <view class="e-attach flex-row flex-help-center" data-url="{{item.url}}" bindtap="tapClick">
+                    <image class="e-attach-icon" src="{{host}}static/img/{{item.icon}}.svg"></image>
+                    <view class="flex-column">
+                        <text>{{item.name}}</text>
+                        <text>{{item.big}}</text>
+                    </view>
                 </view>
             </view>
-            <view class="e-attach flex-row flex-help-center">
-                <image class="e-attach-icon" src="http://127.0.0.1:8360/static/img/xls.svg"></image>
-                <view class="flex-column">
-                    <text>附件1标题</text>
-                    <text>附件1大小</text>
-                </view>
-            </view>
-            <view class="e-attach flex-row flex-help-center">
-                <image class="e-attach-icon" src="http://127.0.0.1:8360/static/img/xls.svg"></image>
-                <view class="flex-column">
-                    <text>附件1标题</text>
-                    <text>附件1大小</text>
-                </view>
-            </view>
-            <view class="e-attach flex-row flex-help-center">
-                <image class="e-attach-icon" src="http://127.0.0.1:8360/static/img/xls.svg"></image>
-                <view class="flex-column">
-                    <text>附件1标题</text>
-                    <text>附件1大小</text>
-                </view>
-            </view>
-            <view class="e-attach flex-row flex-help-center">
-                <image class="e-attach-icon" src="http://127.0.0.1:8360/static/img/xls.svg"></image>
-                <view class="flex-column">
-                    <text>附件1标题</text>
-                    <text>附件1大小</text>
-                </view>
-            </view>
-            <view class="e-attach flex-row flex-help-center">
-                <image class="e-attach-icon" src="http://127.0.0.1:8360/static/img/xls.svg"></image>
-                <view class="flex-column">
-                    <text>附件1标题</text>
-                    <text>附件1大小</text>
-                </view>
-            </view>
-            <view class="e-attach flex-row flex-help-center">
-                <image class="e-attach-icon" src="http://127.0.0.1:8360/static/img/xls.svg"></image>
-                <view class="flex-column">
-                    <text>附件1标题</text>
-                    <text>附件1大小</text>
-                </view>
-            </view>
-            <view class="e-attach flex-row flex-help-center">
-                <image class="e-attach-icon" src="http://127.0.0.1:8360/static/img/xls.svg"></image>
-                <view class="flex-column">
-                    <text>附件1标题</text>
-                    <text>附件1大小</text>
-                </view>
-            </view>
-            <view class="e-attach flex-row flex-help-center">
-                <image class="e-attach-icon" src="http://127.0.0.1:8360/static/img/xls.svg"></image>
-                <view class="flex-column">
-                    <text>附件1标题</text>
-                    <text>附件1大小</text>
-                </view>
-            </view>
-
         </view>
     </view>
 </scroll-view>
+<view class="btn-show flex-column" style="height:{{scrollHeight+190}}px" wx:if="{{btnShow}}">
+    <view class="back-ground" bindtap="cancleDown"></view>
+    <view class="btn flex-row flex-main-center flex-help-center" style="background-color:#E5475E" bindtap="downloadFile">下 载 附 件</view>
+    <view class="btn flex-row flex-main-center flex-help-center" bindtap="cancleDown">取 消 下 载</view>
+</view>

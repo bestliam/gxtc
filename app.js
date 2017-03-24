@@ -43,11 +43,14 @@ App({
                 if (res.data.errno == 10002) {
                     //删除缓存并重新获取userInfo
                     wx.removeStorageSync('userInfo')
-                    that.getUserInfo(function(cb) {
-                        wx.redirectTo({
-                            url: '/pages/index/index'
+                    wx.redirectTo({
+                            url: '/pages/animation/animation'
                         })
-                    })
+                    // that.getUserInfo(function(cb) {
+                    //     wx.redirectTo({
+                    //         url: '/pages/index/index'
+                    //     })
+                    // })
                 } else {
                     cb(res.data);
                 }

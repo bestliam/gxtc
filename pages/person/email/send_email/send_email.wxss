@@ -1,0 +1,32 @@
+.box{padding: 20rpx;height: 100%}
+.user{align-items:flex-start;flex-wrap: wrap;}
+.to-user{padding: 5rpx 10rpx;background-color: #50587d;border-radius: 8rpx;margin: 10rpx;}
+.title{border-bottom: 1px solid #50587d;padding: 10rpx 20rpx}
+.e-content{margin-bottom: 70rpx;line-height: 160%}
+.e-attach{padding: 10rpx;min-height: 100rpx;background-color: #50587d;border-radius: 10rpx;margin-bottom: 10rpx}
+.e-attach-icon{width: 60rpx;height: 60rpx;margin: 0 20rpx;}
+.flex-column{flex: 1}
+
+.user-show{position: absolute;left: 0;top:0;z-index: 99;width: 100%}
+.user-search{flex: 1;background-color: #394166}
+.btn{flex:1;text-align: center;height: 50px;line-height: 50px;background-color: #50587d}
+
+.swiper-tab {
+    width: 100%;
+    text-align: center;
+    line-height: 100rpx;
+    background-color: #50587d;
+}
+.swiper-tab-list {
+    font-size: 30rpx;
+    flex: 1;
+}
+.on {
+    background-color: #3468b3;
+    font-weight: bold;
+}
+.user-info{padding: 30rpx;border-bottom: 1px solid #50587d;line-height: 160%}
+.search-input{height:50px;background-color: #50587d;padding: 0 10px;margin-top: 1px}
+.search-input input{height: 29px;flex:1;background-color: #ffffff;color: #000000}
+button{margin-left: 10rpx;}
+icon{margin: 0 20rpx}

@@ -1,5 +1,5 @@
 /**app.wxss**/
-page{font-family: "Microsoft Yahei";background-color: #394166;font-size: 14px;color: #ffffff}
+page{font-family: "Microsoft Yahei";background-color: #394166;font-size: 14px;color: #ffffff;}
 .header{
     padding: 35rpx 0;text-align: center;border-bottom: 2rpx solid #e8e8e8
 }
