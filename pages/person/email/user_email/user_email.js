@@ -13,7 +13,7 @@ Page({
     sendEmail(e) {
         let action = e.currentTarget.dataset.action
         let emailData = this.data.emailData
-        //附件信息太大，无法传递给下一页面
+            //附件信息太大，无法传递给下一页面
         delete emailData.attachment
         wx.navigateTo({
             url: '../send_email/send_email?EMAIL_ID=' + this.data.emailID + '&ACTION=' + action + '&EMAIL_DATA=' + JSON.stringify(emailData)
@@ -89,9 +89,27 @@ Page({
         })
     },
     tapClick(e) {
-        this.setData({
-            btnShow: true,
-            url: e.currentTarget.dataset.url
-        })
+        let that = this
+        let url = app.globalData.host + 'api/oa/attach_show?' + e.currentTarget.dataset.url
+        console.log(url)
+        wx.downloadFile({
+                header: {
+                    'access_token': app.globalData.userInfo.ACCESS_TOKEN
+                },
+                url: url,
+                success: function(res) {
+                    var filePath = res.tempFilePath
+                    wx.openDocument({
+                        filePath: filePath,
+                        success: function(res) {
+                            console.log('打开文档成功')
+                        }
+                    })
+                }
+            })
+            // this.setData({
+            //     btnShow: true,
+            //     url: e.currentTarget.dataset.url
+            // })
     }
 })

@@ -20,13 +20,14 @@ Page({
             icon: 'loading',
             duration: 5000
         })
-        let userInfo = wx.getStorageSync('userInfo') || [];
+        let userInfo = wx.getStorageSync('userInfo')
         //过期时间是半小时 1000*60*30
-        let expire_in = Date.now() - userInfo.EXPIRE;
+        let expire_in = Date.now() - userInfo.EXPIRE
         if (expire_in < 7200000) {
             app.globalData.userInfo = userInfo
             this.redirectTo()
         } else {
+          wx.removeStorageSync('userInfo')
             let that = this
                 //调用登录接口
             app.getUserInfo(function(userInfo) {

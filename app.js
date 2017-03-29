@@ -43,14 +43,14 @@ App({
                 if (res.data.errno == 10002) {
                     //删除缓存并重新获取userInfo
                     wx.removeStorageSync('userInfo')
-                    wx.redirectTo({
-                            url: '/pages/animation/animation'
-                        })
-                    // that.getUserInfo(function(cb) {
-                    //     wx.redirectTo({
-                    //         url: '/pages/index/index'
+                    // wx.redirectTo({
+                    //         url: '/pages/animation/animation'
                     //     })
-                    // })
+                    that.getUserInfo(function(cb) {
+                        wx.redirectTo({
+                            url: '/pages/index/index'
+                        })
+                    })
                 } else {
                     cb(res.data);
                 }
@@ -83,15 +83,10 @@ App({
                                     code: data.code,
                                     tntid: that.globalData.tntid
                                 }
-                                //查看本地是否存在旧的access_token，如果存在则一起发送到服务器去删除缓存数据，并生成新的access_token
-                                // let access_token = wx.getStorageSync("access_token")
+
                             let headerData = {
                                     'content-type': 'application/json'
                                 }
-                                // if (access_token) {
-                                //   headerData={access_token:access_token}
-                                // }
-                                //调用远端api，获取access_token并写入缓存
                             wx.request({
                                 url: url,
                                 data: postData,
@@ -107,9 +102,7 @@ App({
                                         that.globalData.userInfo.EXPIRE = Date.now()
                                     }
                                     //写入缓存
-                                    // if (resData.data.data.access_token) {
                                     wx.setStorageSync('userInfo', that.globalData.userInfo)
-                                        // }
                                     typeof cb == "function" && cb(that.globalData.userInfo)
                                 },
                                 fail: function() {
@@ -127,7 +120,7 @@ App({
     },
     globalData: {
         userInfo: null,
-        host: 'http://127.0.0.1:8360/', //测试地址
+        host: 'http://api.gxtc.com:8360/', //测试地址
         // host: 'https://api.gxtc.edu.cn/',   //线上地址
         tntid: 'tntc409e8fede7211b2'
     }
