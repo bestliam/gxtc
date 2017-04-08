@@ -3,7 +3,7 @@ var app = getApp()
 
 Page({
     data: {
-      action:'Re',  //新建|回复|转发
+        action: 'Re', //新建|回复|转发
         toUser: [], //收件人
         searchUser: [], //查找人
         currentTab: 0, //当前标签
@@ -17,9 +17,40 @@ Page({
         upload: []
     },
     //发送邮件
-    sendEmail(e){
-      // let that = this
-      // let toUser = that.data.toUser
+    sendEmail(e) {
+        let that = this
+        let toUser = that.data.toUser
+        let emailID = that.data.emailID
+        let emailContent = e.detail.value
+            //toUser 不为空时才执行
+        if (toUser.length > 0) {
+            //拼接发送用户串
+            let toUserStr = ''
+            for (var i = 0; i < toUser.length; i++) {
+                toUserStr += toUser[i].user_uid + ','
+            }
+            toUserStr = toUserStr.substr(0, toUserStr.length - 1); //去除最后的逗号
+            let url = 'oa/send_email'
+            let data = {
+                to_id: toUserStr,
+                subject: emailContent.subject,
+                content: emailContent.content,
+                EMAIL_ID: emailID
+            }
+            app.getHttpData(false, url, 'POST', data, function(reData) {
+                    if (reData.errno == 0) {
+                      wx.showToast({
+                          title: '邮件发送成功',
+                          icon: 'success',
+                          duration: 1500
+                      })
+                    }
+                })
+
+
+        }
+
+        // let toUser = that.data.toUser
 
     },
     listenerInput(e) {
@@ -145,11 +176,11 @@ Page({
     onLoad(option) {
         let that = this
         let action = option.ACTION
-        let actStr=''
+        let actStr = ''
         if (action == 'reply') {
-          let EMAIL_DATA=JSON.parse(option.EMAIL_DATA)
-            //如果是回复
-            let toUser=[{
+            let EMAIL_DATA = JSON.parse(option.EMAIL_DATA)
+                //如果是回复
+            let toUser = [{
                 dept_name: EMAIL_DATA.dept_name,
                 user_id: EMAIL_DATA.from_id,
                 user_name: EMAIL_DATA.from_name,
@@ -160,17 +191,17 @@ Page({
             that.setData({
                 emailData: EMAIL_DATA,
                 toUser: toUser,
-                action:actStr
+                action: actStr
             })
-        }else if (action == 'forward') {
-          actStr = 'Fw:'
-          let url = 'oa/read_email?EMAIL_ID=' + option.EMAIL_ID
-          app.getHttpData(true, url, 'GET', '', function(emailData) {
-            that.setData({
-                emailData: emailData.data,
-                action:actStr
+        } else if (action == 'forward') {
+            actStr = 'Fw:'
+            let url = 'oa/read_email?EMAIL_ID=' + option.EMAIL_ID
+            app.getHttpData(true, url, 'GET', '', function(emailData) {
+                that.setData({
+                    emailData: emailData.data,
+                    action: actStr
+                })
             })
-          })
         }
     },
     cancleDown(e) {

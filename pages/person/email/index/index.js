@@ -71,7 +71,7 @@ Page({
     bindChange: function(e) {
         var that = this;
         if (e.detail.current == 1 && !that.data.sendList.length) {
-            let url = 'oa/send_email'
+            let url = 'oa/send_email_list'
             app.getHttpData(true, url, 'GET', '', function(msgData) {
                 if (msgData.data.data.length > 0) {
                     that.setData({

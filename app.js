@@ -59,7 +59,9 @@ App({
                 console.log("远程数据连接不上")
             },
             complete: function() {
+              if (noteIs) {
                 wx.hideToast()
+              }
             }
         })
     },

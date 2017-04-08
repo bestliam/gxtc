@@ -6,7 +6,6 @@ Page({
         emailData: {},
         scrollHeight: 300,
         host: app.globalData.host,
-        btnShow: false,
         url: '',
         emailID: 0
     },
@@ -53,63 +52,47 @@ Page({
         let that = this
         let url = 'oa/read_email?EMAIL_ID=' + option.EMAIL_ID
         app.getHttpData(true, url, 'GET', '', function(emailData) {
-            console.log(emailData)
             that.setData({
                 emailData: emailData.data,
                 emailID: option.EMAIL_ID
             })
         })
     },
-    cancleDown(e) {
-        this.setData({
-            btnShow: false
-        })
-    },
-    downloadFile(e) {
+
+    tapClick(e) {
         let that = this
-        let url = 'http://127.0.0.1:8360/api/oa/attach_show?' + this.data.url
-        console.log(url)
-        wx.downloadFile({
-            url: url, //仅为示例，并非真实的资源
-            success: function(res) {
-                wx.saveFile({
-                    tempFilePath: res.tempFilePath,
-                    success: function(res2) {
-                        that.setData({
-                            btnShow: false
-                        })
-                        wx.showToast({
-                            title: '文件下载成功',
-                            icon: 'success',
-                            duration: 1000
+        let fileType = e.currentTarget.dataset.type //获取文件类型
+        let imgArr = ['png', 'jpg', 'gif']
+        let imgFlag = imgArr.indexOf(fileType)
+        let offArr = ['doc', 'xls', 'ppt', 'pdf', 'docx', 'xlsx', 'pptx']
+        let offFlag = offArr.indexOf(fileType)
+        let url = 'oa/attach_show?' + e.currentTarget.dataset.url
+        app.getHttpData(true, url, 'GET', '', function(attachData) {
+            let openUrl = app.globalData.host + 'static/oa_attach/' + attachData.data
+            if (offFlag != -1) {
+                wx.downloadFile({
+                    url: openUrl,
+                    success: function(res) {
+                        let filePath = res.tempFilePath
+                        wx.openDocument({
+                            filePath: filePath
                         })
                     }
                 })
+            } else if (imgFlag != -1) {
+                wx.previewImage({
+                    current: openUrl, // 当前显示图片的http链接
+                    urls: [openUrl] // 需要预览的图片http链接列表
+                })
+            } else {
+                wx.showModal({
+                    title: '提示',
+                    content: '目前不支持在线浏览这种类型文件',
+
+                })
             }
         })
-    },
-    tapClick(e) {
-        let that = this
-        let url = app.globalData.host + 'api/oa/attach_show?' + e.currentTarget.dataset.url
-        console.log(url)
-        wx.downloadFile({
-                header: {
-                    'access_token': app.globalData.userInfo.ACCESS_TOKEN
-                },
-                url: url,
-                success: function(res) {
-                    var filePath = res.tempFilePath
-                    wx.openDocument({
-                        filePath: filePath,
-                        success: function(res) {
-                            console.log('打开文档成功')
-                        }
-                    })
-                }
-            })
-            // this.setData({
-            //     btnShow: true,
-            //     url: e.currentTarget.dataset.url
-            // })
+
+
     }
 })

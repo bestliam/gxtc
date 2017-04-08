@@ -1,36 +1,38 @@
-<view class="box flex-column">
-    <text>收件人：</text>
-    <view class="user flex-row title flex-help-center">
-        <text class="to-user" wx:for="{{toUser}}" wx:key="{{index}}" bindtap="delUser" data-id="{{item.user_uid}}" data-name="{{item.user_name}}">{{item.user_name}}</text>
-        <text style="flex:1"></text>
-        <image src="{{host}}static/img/plus.svg" style="width:28px;height:28px" bindtap="addUser"></image>
-    </view>
-    <text>\r\n主题：</text>
-    <input class="title" value="{{action}}{{emailData.subject}}" />
-</view>
-<scroll-view scroll-y="true" style="width: 100%;height:{{scrollHeight}}px">
+<form bindsubmit="sendEmail">
     <view class="box flex-column">
-        <text>\r内容：</text>
-        <view class="e-content title">
-            <textarea auto-height value="{{emailData.content}}" maxlength="-1" />
+        <text>收件人：</text>
+        <view class="user flex-row title flex-help-center">
+            <text class="to-user" wx:for="{{toUser}}" wx:key="{{index}}" bindtap="delUser" data-id="{{item.user_uid}}" data-name="{{item.user_name}}">{{item.user_name}}</text>
+            <text style="flex:1"></text>
+            <image src="{{host}}static/img/plus.svg" style="width:28px;height:28px" bindtap="addUser"></image>
         </view>
-        <view class="flex-column">
-            <view wx:if="{{emailData.attachment}}" wx:for="{{emailData.attachment}}" wx:key="{{index}}">
-                <view class="e-attach flex-row flex-help-center" data-url="{{item.url}}" bindtap="tapClick">
-                    <image class="e-attach-icon" src="{{host}}static/img/{{item.icon}}.svg"></image>
-                    <view class="flex-column">
-                        <text>{{item.name}}</text>
-                        <text>{{item.big}}</text>
+        <text>\r\n主题：</text>
+        <textarea class="title" name="subject" value="{{action}}{{emailData.subject}}" maxlength="-1" auto-height />
+    </view>
+    <scroll-view scroll-y="true" style="width: 100%;height:{{scrollHeight}}px">
+        <view class="box flex-column">
+            <text>\r内容：</text>
+            <view class="e-content title">
+                <textarea name="content" value="{{emailData.content}}" maxlength="-1" auto-height />
+            </view>
+            <view class="flex-column">
+                <view wx:if="{{emailData.attachment}}" wx:for="{{emailData.attachment}}" wx:key="{{index}}">
+                    <view class="e-attach flex-row flex-help-center" data-url="{{item.url}}" bindtap="tapClick">
+                        <image class="e-attach-icon" src="{{host}}static/img/{{item.icon}}.svg"></image>
+                        <view class="flex-column">
+                            <text>{{item.name}}</text>
+                            <text>{{item.big}}</text>
+                        </view>
                     </view>
                 </view>
-            </view>
 
-            <view style="text-align:center;margin-top:10px">
-                <button type="primary" size="mini" disabled="{{toUser.length==0}}" bindtap="sendEmail">确认发送</button>
+                <view style="text-align:center;margin-top:10px">
+                    <button type="primary" size="mini" disabled="{{toUser.length==0}}" formType="submit">确认发送</button>
+                </view>
             </view>
         </view>
-    </view>
-</scroll-view>
+    </scroll-view>
+</form>
 <view class="user-show flex-column" style="height:{{scrollHeight+180}}px" wx:if="{{btnShow}}">
     <view class="swiper-tab flex-row flex-main-center">
         <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">已选({{toUser.length}})</view>

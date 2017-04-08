@@ -15,7 +15,7 @@
         <text class="e-content">{{emailData.content||'无内容'}}</text>
         <view class="flex-column" wx:if="{{emailData.attachment}}">
             <view wx:for="{{emailData.attachment}}" wx:key="{{index}}">
-                <view class="e-attach flex-row flex-help-center" data-url="{{item.url}}" bindtap="tapClick">
+                <view class="e-attach flex-row flex-help-center" data-url="{{item.url}}" data-type="{{item.icon}}" bindtap="tapClick">
                     <image class="e-attach-icon" src="{{host}}static/img/{{item.icon}}.svg"></image>
                     <view class="flex-column">
                         <text>{{item.name}}</text>
@@ -26,8 +26,3 @@
         </view>
     </view>
 </scroll-view>
-<view class="btn-show flex-column" style="height:{{scrollHeight+190}}px" wx:if="{{btnShow}}">
-    <view class="back-ground" bindtap="cancleDown"></view>
-    <view class="btn flex-row flex-main-center flex-help-center" style="background-color:#E5475E" bindtap="downloadFile">下 载 附 件</view>
-    <view class="btn flex-row flex-main-center flex-help-center" bindtap="cancleDown">取 消 下 载</view>
-</view>
