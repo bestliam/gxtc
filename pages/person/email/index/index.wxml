@@ -20,12 +20,11 @@
             <view class="loading" wx:if="{{loadShow}}">数据加载中...</view>
         </scroll-view>
     </swiper-item>
-    <!-- 我是呵呵 -->
     <swiper-item class="un-read">
         <!-- 滚动区域 -->
         <scroll-view scroll-y="true" style="height:{{winHeight-50}}px" bindscrolltolower="lower">
             <view wx:key="msgItem" wx:for="{{sendList}}">
-                <navigator class="msg flex-row flex-help-center" url="../user_email/user_email?EMAIL_ID={{item.q_id}}">
+                <view class="msg flex-row flex-help-center">
                     <view class="msg-main flex-column">
                         <text class="msg-from">{{item.from_name}}</text>
                         <text class="msg-content">{{item.subject}}</text>
@@ -33,10 +32,9 @@
                     <text class="count" wx:if="{{item.read_flag=='0'}}">未读</text>
                     <text class="msg-date">{{item.send_time}}</text>
                     <image wx:if="{{item.has_attachment=='1'}}" class="attachment" model="widthFix" src="{{host}}static/img/attachment.svg"></image>
-                </navigator>
+                </view>
             </view>
             <view class="loading" wx:if="{{loadShow}}">数据加载中...</view>
         </scroll-view>
     </swiper-item>
-    <!-- 我是嘿嘿 -->
 </swiper>

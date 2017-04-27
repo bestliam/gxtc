@@ -8,6 +8,8 @@
     "pages/person/email/index/index",
     "pages/person/email/user_email/user_email",
     "pages/person/email/send_email/send_email",
+    "pages/person/workflow/index/index",
+    "pages/person/workflow/handle/handle",
     "pages/logs/logs"
   ],
   "tabBar": {

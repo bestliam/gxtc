@@ -4,7 +4,7 @@
 .e-content{text-indent: 2em;margin-bottom: 70rpx;line-height: 160%}
 .e-attach{padding: 10rpx;min-height: 100rpx;background-color: #50587d;border-radius: 10rpx;margin-bottom: 10rpx}
 .e-attach-icon{width: 60rpx;height: 60rpx;margin: 0 20rpx;}
-.flex-column{flex: 1}
+.flex-column{flex: 1;word-break:break-all}
 .btn-show{position: absolute;left: 0;top:0;z-index: 99;width: 100%}
 .back-ground{flex: 10;background-color: #50587d;opacity:0.5}
 .btn{flex:1;background-color: #3468B3;opacity:1}

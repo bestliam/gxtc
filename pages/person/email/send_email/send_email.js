@@ -16,42 +16,105 @@ Page({
         emailID: 0,
         upload: []
     },
+    //选择图片
+    chooseImg(e) {
+        let that = this
+        wx.chooseImage({
+            count: 1, // 默认9
+            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+            success: function(res) {
+                // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+                let tempFilePaths = res.tempFilePaths[0]
+                let strArr = tempFilePaths.split(".")
+                let name = strArr[0].split("-")[1] //截取姓名
+                let icon = strArr[1] //截取后缀
+                let newPic = {
+                    name: name + '.' + icon,
+                    url: tempFilePaths,
+                    icon: icon
+                }
+                let upload = that.data.upload
+                upload.push(newPic)
+                that.setData({
+                    upload: upload
+                })
+            }
+        })
+    },
+    sendImg(currentUploadImgIndex, cb) {
+        let that = this
+        let upload = this.data.upload
+        let _currentUploadImgIndex = currentUploadImgIndex
+        wx.uploadFile({
+            url: app.globalData.host + 'api/oa/email_upload',
+            header: {
+                'access_token': app.globalData.userInfo.ACCESS_TOKEN
+            },
+            filePath: upload[_currentUploadImgIndex].url,
+            name: 'ATTACHMENT',
+            formData: {
+                name: upload[_currentUploadImgIndex].name,
+            },
+            success: function(res) {
+                _currentUploadImgIndex += 1
+                if (_currentUploadImgIndex < upload.length) {
+                    that.sendImg(_currentUploadImgIndex, cb)  //递归发送图片
+                } else {
+                    //所有图片上传完后回调
+                    cb(res.data)
+                }
+            }
+        })
+    },
     //发送邮件
     sendEmail(e) {
         let that = this
-        let toUser = that.data.toUser
+        let upload = that.data.upload
         let emailID = that.data.emailID
+        let toUser = that.data.toUser
         let emailContent = e.detail.value
             //toUser 不为空时才执行
         if (toUser.length > 0) {
-            //拼接发送用户串
-            let toUserStr = ''
-            for (var i = 0; i < toUser.length; i++) {
-                toUserStr += toUser[i].user_uid + ','
-            }
-            toUserStr = toUserStr.substr(0, toUserStr.length - 1); //去除最后的逗号
-            let url = 'oa/send_email'
-            let data = {
-                to_id: toUserStr,
-                subject: emailContent.subject,
-                content: emailContent.content,
-                EMAIL_ID: emailID
-            }
-            app.getHttpData(false, url, 'POST', data, function(reData) {
-                    if (reData.errno == 0) {
-                      wx.showToast({
-                          title: '邮件发送成功',
-                          icon: 'success',
-                          duration: 1500
-                      })
+            //如果存在附件，上传附件到服务器
+            if (upload.length > 0) {
+                that.sendImg(0, function(res) {
+                    if (JSON.parse(res).errno == 0) { //图片上传成功
+                        //拼接发送用户串
+                        let toUserStr = ''
+                        for (var i = 0; i < toUser.length; i++) {
+                            toUserStr += toUser[i].user_uid + ','
+                        }
+                        toUserStr = toUserStr.substr(0, toUserStr.length - 1); //去除最后的逗号
+                        let url = 'oa/send_email'
+                        let data = {
+                                to_id: toUserStr,
+                                subject: emailContent.subject,
+                                content: emailContent.content,
+                                EMAIL_ID: emailID,
+                                ATYPE:that.data.action
+                            }
+                            //如果存在上传附件，则加入附件前缀
+                        if (upload.length > 0) {
+                            data.upload = upload
+                        }
+                        app.getHttpData(false, url, 'POST', data, function(reData) {
+                            if (reData.errno == 0) {
+                                wx.showToast({
+                                        title: '邮件发送成功',
+                                        icon: 'success',
+                                        duration: 1500
+                                    })
+                                    wx.navigateBack({
+                                        delta: 2
+                                    })
+                            }
+                        })
                     }
                 })
-
+            }
 
         }
-
-        // let toUser = that.data.toUser
-
     },
     listenerInput(e) {
         this.setData({
@@ -187,19 +250,21 @@ Page({
                 priv_name: EMAIL_DATA.priv_name,
                 user_uid: EMAIL_DATA.uid
             }]
-            actStr = 'Re:'
+            actStr = 'Re'
             that.setData({
                 emailData: EMAIL_DATA,
                 toUser: toUser,
-                action: actStr
+                action: actStr,
+                emailID: option.EMAIL_ID
             })
         } else if (action == 'forward') {
-            actStr = 'Fw:'
+            actStr = 'Fw'
             let url = 'oa/read_email?EMAIL_ID=' + option.EMAIL_ID
             app.getHttpData(true, url, 'GET', '', function(emailData) {
                 that.setData({
                     emailData: emailData.data,
-                    action: actStr
+                    action: actStr,
+                    emailID: option.EMAIL_ID
                 })
             })
         }
@@ -207,12 +272,6 @@ Page({
     cancleDown(e) {
         this.setData({
             btnShow: false
-        })
-    },
-    tapClick(e) {
-        this.setData({
-            btnShow: true,
-            url: e.currentTarget.dataset.url
         })
     }
 })

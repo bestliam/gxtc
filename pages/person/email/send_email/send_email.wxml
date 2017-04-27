@@ -7,7 +7,7 @@
             <image src="{{host}}static/img/plus.svg" style="width:28px;height:28px" bindtap="addUser"></image>
         </view>
         <text>\r\n主题：</text>
-        <textarea class="title" name="subject" value="{{action}}{{emailData.subject}}" maxlength="-1" auto-height />
+        <textarea class="title" name="subject" value="{{action}}:{{emailData.subject}}" maxlength="-1" auto-height />
     </view>
     <scroll-view scroll-y="true" style="width: 100%;height:{{scrollHeight}}px">
         <view class="box flex-column">
@@ -17,7 +17,7 @@
             </view>
             <view class="flex-column">
                 <view wx:if="{{emailData.attachment}}" wx:for="{{emailData.attachment}}" wx:key="{{index}}">
-                    <view class="e-attach flex-row flex-help-center" data-url="{{item.url}}" bindtap="tapClick">
+                    <view class="e-attach flex-row flex-help-center" data-url="{{item.url}}">
                         <image class="e-attach-icon" src="{{host}}static/img/{{item.icon}}.svg"></image>
                         <view class="flex-column">
                             <text>{{item.name}}</text>
@@ -25,7 +25,21 @@
                         </view>
                     </view>
                 </view>
-
+                <view wx:if="{{upload.length>0}}" wx:for="{{upload}}" wx:key="{{index}}">
+                    <view class="e-attach flex-row flex-help-center" data-url="{{item.url}}">
+                        <image class="e-attach-icon" src="{{host}}static/img/{{item.icon}}.svg"></image>
+                        <view class="flex-column">
+                            <text>{{item.name}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="e-attach flex-row flex-help-center" bindtap="chooseImg">
+                    <image class="e-attach-icon" src="{{host}}static/img/plus.svg"></image>
+                    <view class="flex-column">
+                        <text>添加附件</text>
+                        <text>目前仅支持上传图片</text>
+                    </view>
+                </view>
                 <view style="text-align:center;margin-top:10px">
                     <button type="primary" size="mini" disabled="{{toUser.length==0}}" formType="submit">确认发送</button>
                 </view>

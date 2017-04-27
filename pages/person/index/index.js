@@ -17,7 +17,7 @@ Page({
                 wx.navigateTo({url: '../msg/index/index'})
                 break;
             default:
-                console.log('工作流')
+                wx.navigateTo({url: '../workflow/index/index'})
                 break;
         }
     },

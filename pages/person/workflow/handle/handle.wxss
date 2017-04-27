@@ -1,0 +1,9 @@
+.workflow-main{padding: 30rpx 30rpx;}
+.top{line-height: 180%;font-size: 16px}
+/*.workflow-title{width: 80px}*/
+.form{background-color: #50587d;margin-top: 20px;padding: 20px}
+.input{border-bottom: 1px solid #ffffff}
+.workflow-content{flex: 1}
+.e-attach{padding: 10rpx;min-height: 100rpx;}
+.e-attach-icon{width: 60rpx;height: 60rpx;margin: 0 20rpx;}
+.flex-column{flex: 1;word-break:break-all}

@@ -1,0 +1,76 @@
+<scroll-view scroll-y="true" style="height:{{winHeight}}px">
+    <view class="workflow-main flex-column">
+        <view class="top">
+            <view class="flex-row">
+                <text class="workflow-content">NO.{{workFlowData.run_id}}</text>
+            </view>
+            <view class="flex-row">
+                <text class="workflow-content">{{workFlowData.run_name}}</text>
+            </view>
+            <view class="flex-row">
+                <text class="workflow-title">流程发起人：</text>
+                <text class="workflow-content">{{workFlowData.begin_user}}</text>
+            </view>
+            <view class="flex-row">
+                <text class="workflow-title">流程开始时间：</text>
+                <text class="workflow-content">{{workFlowData.begin_time}}</text>
+            </view>
+
+        </view>
+        <form class="form" bindsubmit="formSubmit">
+            <view class="flex-row">
+                <text class="workflow-title">当前步骤：</text>
+                <text class="workflow-content">{{workFlowData.prcs_name}}</text>
+            </view>
+            <view wx:key="{{index}}" wx:for="{{model}}" style="margin-top:15px">
+                <view class="flex-column" wx:if="{{item.writable}}">
+                    <text class="workflow-title">{{item.title}}：</text>
+                    <view wx:if="{{item.writable}}" class="workflow-content">
+                        <textarea class="input" name="{{item.id}}" wx:if="{{item.type=='TTextareaCtrl'}}" value="{{item.content||item.value}}" auto-height/>
+                        <input class="input" name="{{item.id}}" wx:else value="{{item.content||item.value}}" />
+                    </view>
+                </view>
+                <view class="flex-row" wx:else>
+                    <text class="workflow-title">{{item.title}}：</text>
+                    <text class="workflow-content">{{item.content||item.value}}</text>
+                </view>
+            </view>
+
+            <view class="form" wx:if="{{workFlowData.attachment}}">
+                <view class="flex-row">
+                    <text class="workflow-title">公共附件：</text>
+                </view>
+                <view wx:key="{{index}}" wx:for="{{workFlowData.attachment}}" style="margin-top:10px">
+                    <view class="e-attach flex-row flex-help-center" data-url="{{item.url}}" data-type="{{item.icon}}" bindtap="tapClick">
+                        <image class="e-attach-icon" src="{{host}}static/img/{{item.icon}}.svg"></image>
+                        <view class="flex-column">
+                            <text>{{item.name}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+
+            <view class="form" wx:if="{{workFlowData.feedback_array}}">
+                <view class="flex-row">
+                    <text class="workflow-title">会签意见：</text>
+                </view>
+                <view wx:key="{{index}}" wx:for="{{workFlowData.feedback_array}}" style="margin-top:10px">
+                    <view class="e-attach flex-row flex-help-center" data-url="{{item.url}}" data-type="{{item.icon}}" bindtap="tapClick">
+                        <image class="e-attach-icon" src="{{host}}static/img/sign.svg"></image>
+                        <view class="flex-column">
+                            <text>第{{item.prcs_id}}步：{{item.prcs_name}}({{item.time}})</text>
+                            <text>{{item.user_name}}({{item.dept_name}})</text>
+                            <text>{{item.content}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="flex-row flex-main-center" style="margin-top:10px">
+                <view wx:key="{{index}}" wx:for="{{workFlowData.actBtn}}">
+                    <button wx:if="{{item=='删除'}}" formType="submit" type="warn" size="mini" style="margin-right:5px">{{item}}</button>
+                    <button wx:else formType="submit" type="primary" size="mini" style="margin-right:5px">{{item}}</button>
+                </view>
+            </view>
+        </form>
+    </view>
+</scroll-view>

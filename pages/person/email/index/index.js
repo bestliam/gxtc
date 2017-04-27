@@ -17,10 +17,10 @@ Page({
         } else {
             list = that.data.sendList
         }
-        app.getHttpData(false, url, 'GET', '', function(msgData) {
-            if (msgData.data.data.length > 0) {
-                for (var i = 0; i < msgData.data.data.length; i++) {
-                    list.push(msgData.data.data[i])
+        app.getHttpData(false, url, 'GET', '', function(emailData) {
+            if (emailData.data.data.length > 0) {
+                for (var i = 0; i < emailData.data.data.length; i++) {
+                    list.push(emailData.data.data[i])
                 }
                 if (tab == 0) {
                     that.setData({
@@ -60,10 +60,10 @@ Page({
             }
         })
         let url = 'oa/receive_email'
-        app.getHttpData(true, url, 'GET', '', function(msgData) {
-            if (msgData.data.data.length > 0) {
+        app.getHttpData(true, url, 'GET', '', function(emailData) {
+            if (emailData.data.data.length > 0) {
                 that.setData({
-                    list: msgData.data.data
+                    list: emailData.data.data
                 })
             }
         })
@@ -72,10 +72,11 @@ Page({
         var that = this;
         if (e.detail.current == 1 && !that.data.sendList.length) {
             let url = 'oa/send_email_list'
-            app.getHttpData(true, url, 'GET', '', function(msgData) {
-                if (msgData.data.data.length > 0) {
+            app.getHttpData(true, url, 'GET', '', function(emailData) {
+              console.log(emailData.data)
+                if (emailData.data.data.length > 0) {
                     that.setData({
-                        sendList: msgData.data.data,
+                        sendList: emailData.data.data,
                         currentTab: e.detail.current
                     })
                 }
