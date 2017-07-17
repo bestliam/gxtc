@@ -22,7 +22,6 @@ Page({
         let that = this
         let url = 'oa/get_one_work_flow_data'
         app.getHttpData(true, url, 'POST', options, function(workFlowData) {
-            console.log(workFlowData)
             that.setData({
                 workFlowData: workFlowData.data,
                 model: workFlowData.data.form_fields,
@@ -55,7 +54,12 @@ Page({
         let data = {data:JSON.stringify(subFormData),RUN_ID:options.RUN_ID,FLOW_ID:options.FLOW_ID,PRCS_ID:options.PRCS_ID,FLOW_PRCS:options.FLOW_PRCS}
         let url = 'oa/save_one_work_flow_data'
         app.getHttpData(true, url, 'POST', data, function(workFlowData) {
-            console.log(workFlowData)
+            if (workFlowData.errno == 0) {
+              console.log(workFlowData,'保存成功，进入转交页面turn') //保存表单成功后进入转交下一步
+              wx.navigateTo({
+                url: '../turn/turn?RUN_ID='+options.RUN_ID+'&FLOW_ID='+options.FLOW_ID+'&PRCS_ID='+options.PRCS_ID+'&FLOW_PRCS='+options.FLOW_PRCS+'&PRCS_KEY_ID='+options.PRCS_KEY_ID
+              })
+            }
         })
     },
     //点击附件方法

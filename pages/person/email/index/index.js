@@ -37,19 +37,19 @@ Page({
         })
     },
     lower() {
-        var that = this
+        let that = this
         let tab = that.data.currentTab
-        let url = 'oa/get_more_email?curriterms='
+        let url = 'email/get_more_email?curriterms='
         if (tab == 0) {
             url = url + that.data.list.length
         } else {
             url = url + that.data.sendList.length
         }
-        url = url + '&&tab=' + tab
-        this.getMoreData(that, url, tab)
+        url = url + '&tab=' + tab
+        that.getMoreData(that, url, tab)
     },
     onLoad() {
-        var that = this
+        let that = this
             //获取系统信息
         wx.getSystemInfo({
             success: function(res) {
@@ -59,7 +59,7 @@ Page({
                 })
             }
         })
-        let url = 'oa/receive_email'
+        let url = 'email/receive_email'
         app.getHttpData(true, url, 'GET', '', function(emailData) {
             if (emailData.data.data.length > 0) {
                 that.setData({

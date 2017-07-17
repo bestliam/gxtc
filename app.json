@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "pages/animation/animation",
     "pages/register/register",
     "pages/person/index/index",
@@ -10,35 +10,41 @@
     "pages/person/email/send_email/send_email",
     "pages/person/workflow/index/index",
     "pages/person/workflow/handle/handle",
+    "pages/person/workflow/turn/turn",
+    "pages/person/workflow/turn_user/turn_user",
     "pages/logs/logs"
   ],
   "tabBar": {
-    "backgroundColor":"#2f3658",
-    "borderStyle":"",
-    "color":"#ffffff",
+    "backgroundColor": "#2f3658",
+    "borderStyle": "",
+    "color": "#ffffff",
     "selectedColor": "#cc324c",
-    "list": [{
-      "iconPath":"images/person.png",
-      "selectedIconPath":"images/person-actived.png",
-      "pagePath": "pages/person/index/index",
-      "text": "个人"
-    },{
-      "iconPath":"images/org.png",
-      "selectedIconPath":"images/org-actived.png",
-      "pagePath": "pages/person1/person1",
-      "text": "组织"
-    },{
-      "iconPath":"images/more.png",
-      "selectedIconPath":"images/more-actived.png",
-      "pagePath": "pages/person2/person2",
-      "text": "更多"
-    }]
+    "list": [
+      {
+        "iconPath": "images/person.png",
+        "selectedIconPath": "images/person-actived.png",
+        "pagePath": "pages/person/index/index",
+        "text": "个人"
+      },
+      {
+        "iconPath": "images/org.png",
+        "selectedIconPath": "images/org-actived.png",
+        "pagePath": "pages/person1/person1",
+        "text": "组织"
+      },
+      {
+        "iconPath": "images/more.png",
+        "selectedIconPath": "images/more-actived.png",
+        "pagePath": "pages/person2/person2",
+        "text": "更多"
+      }
+    ]
   },
-  "window":{
-    "backgroundTextStyle":"light",
-    "backgroundColor":"#EEEEEE",
+  "window": {
+    "backgroundTextStyle": "light",
+    "backgroundColor": "#EEEEEE",
     "navigationBarBackgroundColor": "#394166",
     "navigationBarTitleText": "广西师范学院智慧校园服务",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   }
 }

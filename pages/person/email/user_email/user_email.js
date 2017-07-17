@@ -9,6 +9,7 @@ Page({
         url: '',
         emailID: 0
     },
+    //回复或转发邮件
     sendEmail(e) {
         let action = e.currentTarget.dataset.action
         let emailData = this.data.emailData
@@ -25,8 +26,9 @@ Page({
             content: '确认删除该邮件吗？',
             success: function(res) {
                 if (res.confirm) {
-                    let url = 'oa/del_email?EMAIL_ID=' + that.data.emailID
+                    let url = 'email/del_email?EMAIL_ID=' + that.data.emailID
                     app.getHttpData(false, url, 'GET', '', function(res) {
+                      console.log(res)
                         if (res.data.status == 'ok') {
                             // 更新上一页数据
                             let pages = getCurrentPages()
@@ -50,7 +52,7 @@ Page({
     },
     onLoad(option) {
         let that = this
-        let url = 'oa/read_email?EMAIL_ID=' + option.EMAIL_ID
+        let url = 'email/read_email?EMAIL_ID=' + option.EMAIL_ID
         app.getHttpData(true, url, 'GET', '', function(emailData) {
             that.setData({
                 emailData: emailData.data,
@@ -88,7 +90,6 @@ Page({
                 wx.showModal({
                     title: '提示',
                     content: '目前不支持在线浏览这种类型文件',
-
                 })
             }
         })

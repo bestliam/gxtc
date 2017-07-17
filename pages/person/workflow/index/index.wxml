@@ -1,4 +1,5 @@
 <scroll-view scroll-y="true" style="height:{{winHeight}}px">
+    <view class="flex-column flex-help-center" wx:if="{{workFlowList.length==0}}">暂无待办工作</view>
     <view wx:key="index" wx:for="{{workFlowList}}">
         <navigator class="workflow flex-row flex-help-center" url="../handle/handle?RUN_ID={{item.run_id}}&FLOW_ID={{item.flow_id}}&PRCS_ID={{item.prcs_id}}&FLOW_PRCS={{item.flow_prcs}}&PRCS_KEY_ID={{item.prcs_key_id}}">
             <view class="workflow-main flex-column">

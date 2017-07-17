@@ -1,0 +1,43 @@
+<scroll-view scroll-y="true" style="height:{{winHeight}}px">
+    <view class="workflow-main flex-column">
+        <view class="top">
+            <view class="flex-row">
+                <text class="workflow-content">工作名称：{{workFlowData.run_name}}</text>
+            </view>
+            <view class="flex-row">
+                <text class="workflow-title">发起人：</text>
+                <text class="workflow-content">{{workFlowData.begin_user_name}}</text>
+            </view>
+        </view>
+        <view class="form">
+            <view class="flex-row">
+                <text class="workflow-title" wx:if="{{workFlowData.is_next_flag==0}}">第2步二级单位核稿</text>
+            </view>
+            <view class="flex-row">
+                <text class="workflow-title">主办人相关：</text>
+                <text class="workflow-content" wx:if="{{workFlowData.top_flag.user_lock==0}}">明确指定主办人</text>
+            </view>
+            <view class="flex-row">
+                <text class="workflow-title">主办人：</text>
+                <text class="workflow-content" bindtap="delSponsor" data-byname="{{sponsor.byname}}">{{sponsor.user_name}}</text>
+            </view>
+            <view class="flex-row">
+                <text class="workflow-title">经办人：</text>
+                <view wx:key="{{index}}" wx:for="{{handler}}">
+                    <text class="workflow-content handler">{{item.user_name}}</text>
+                </view>
+            </view>
+            <view class="flex-row flex-help-center">
+                <input class="input" placeholder="请输入用户姓名或工号查询" bindinput="bindInput" />
+            </view>
+            <view wx:for="{{filtUser}}" wx:key="{{index}}">
+                <view class="flex-row flex-help-center" style="margin-top:15px">
+                    <button size="mini" type="primary" wx:if="{{item.ZB}}" bindtap="delSponsor" data-byname="{{sponsor.byname}}">主办</button>
+                    <button size="mini" wx:else bindtap="setSponsor" data-user="{{item}}">主办</button>
+                    <text class="workflow-content" style="margin-left:15px" bindtap="selectUser" data-user="{{item}}">{{item.user_name}} (部门:{{item.dept_name}})</text>
+                </view>
+            </view>
+        </view>
+        <button style="margin-top:15px" disabled="{{!sponsor.byname}}" bindtap="turnSubmit">提交</button>
+    </view>
+</scroll-view>

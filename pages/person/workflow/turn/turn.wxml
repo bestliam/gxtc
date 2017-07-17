@@ -1,0 +1,25 @@
+<scroll-view scroll-y="true" style="height:{{winHeight}}px">
+    <view class="workflow-main flex-column">
+        <view class="top">
+            <view class="flex-row">
+                <text class="workflow-content">工作名称：{{workFlowData.run_name}}</text>
+            </view>
+            <view class="flex-row">
+                <text class="workflow-title">发起人：</text>
+                <text class="workflow-content">{{workFlowData.begin_user_name}}</text>
+            </view>
+        </view>
+        <form class="form" bindsubmit="formSubmit">
+            <view class="flex-row">
+                <text class="workflow-title" wx:if="{{workFlowData.is_next_flag==0}}">请选择下一步骤</text>
+            </view>\r\n
+
+            <radio-group class="radio-group" style="margin-top:15px" name="checkbox">
+                <label class="radio" wx:for="{{workFlowData.prcsData}}" wx:key="{{index}}" class="flex-column">
+                    <view class="flex-row radio"><radio value="{{item.prcs_num}}" checked="{{item.checked}}"/>{{item.next_prcs_name}}</view>
+                </label>
+            </radio-group>
+            <button formType="submit" type="primary" size="mini" style="margin-top:15px">继续</button>
+        </form>
+    </view>
+</scroll-view>

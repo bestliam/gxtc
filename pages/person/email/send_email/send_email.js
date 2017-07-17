@@ -86,7 +86,7 @@ Page({
                             toUserStr += toUser[i].user_uid + ','
                         }
                         toUserStr = toUserStr.substr(0, toUserStr.length - 1); //去除最后的逗号
-                        let url = 'oa/send_email'
+                        let url = 'email/send_email'
                         let data = {
                                 to_id: toUserStr,
                                 subject: emailContent.subject,
@@ -105,8 +105,11 @@ Page({
                                         icon: 'success',
                                         duration: 1500
                                     })
+                                    // 更新上一页数据
+                                    let pages = getCurrentPages()
+                                    pages[1].onLoad()
                                     wx.navigateBack({
-                                        delta: 2
+                                        delta: 5
                                     })
                             }
                         })
